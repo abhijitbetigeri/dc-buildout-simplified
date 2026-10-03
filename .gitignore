@@ -1,0 +1,26 @@
+# secrets — never commit
+.env
+.env.local
+.env.*.local
+*.key
+secrets/
+
+# deps
+node_modules/
+.pnp
+.pnp.js
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# builds
+.next/
+out/
+dist/
+build/
+
+# agent scratch
+.DS_Store
+*.log
+.vercel
