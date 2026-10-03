@@ -9,7 +9,7 @@
   "platformLabel": "AI-SRV-G4 — 480 node cluster",
   "supersedes": "QVL-G4-2026.08-rev-D",
   "qvlRevision": "QVL-G4-2026.08-rev-E",
-  "amendedAt": "2026-10-03T22:04:24.839Z",
+  "amendedAt": "2026-10-03T22:15:14.901Z",
   "requirements": {
     "capacityGB": 64,
     "speedMTps": 4800,
@@ -19,20 +19,18 @@
   },
   "approvedAlternates": [
     {
-      "mpn": "MTC20F2085S1RC48BA1",
-      "vendor": "Micron (offered via broker — Pacific Rim Components Ltd., HK)",
+      "mpn": "M321R8GA0BB0-CQK",
+      "vendor": "Samsung Semiconductor",
       "specs": {
-        "capacity": "64GB",
-        "organization": "2Rx4",
-        "speed": "4800 MT/s (PC5-38400B)",
-        "formFactor": "RDIMM 288-pin",
+        "capacityGB": 64,
+        "speedMTps": 4800,
+        "ranks": "2Rx4",
+        "formFactor": "RDIMM",
         "voltage": "1.1V",
-        "height": "31.25mm",
-        "ecc": "on-die + side-band",
-        "lot": "PRC-24817"
+        "eccType": "on-die+side-band"
       },
-      "validationReportId": "MV-G4-0244",
-      "validatedOn": "2026-03-02",
+      "validationReportId": "MV-G4-0288",
+      "validatedOn": "2026-05-29",
       "minBiosVersion": "G4-BIOS-1.3.2"
     }
   ],
@@ -43,10 +41,5 @@
       "revisitWhen": "validation report issued"
     }
   ],
-  "blacklistedLots": [
-    {
-      "lot": "PRC-24817",
-      "reason": "Counterfeit — module-level remark confirmed"
-    }
-  ]
+  "blacklistedLots": []
 }
