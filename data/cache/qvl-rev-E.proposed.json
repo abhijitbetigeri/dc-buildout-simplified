@@ -41,5 +41,6 @@
       "revisitWhen": "validation report issued"
     }
   ],
-  "blacklistedLots": []
+  "blacklistedLots": [],
+  "entireCheckpoint": "01M41Y6846EXDDP1RGZY9B6C1T"
 }
