@@ -1,0 +1,50 @@
+# LINEDOWN marking fixture — flat text sidecar.
+# GENERATED from the sibling .json. Edit the .json, not this file.
+# Purpose: the text-match fallback for beat 5. If Moss image embedding is unavailable
+# (MILESTONES.md risk register, M1), every discriminator in beat 5 is still reachable from
+# these lines using string, regex, range and date comparisons alone.
+# Format: TAB-separated. <TAG>\t<value>   — grep-friendly and embedding-friendly.
+# ILLUSTRATIVE: all marking strings, lot codes and serials are fabricated for the demo.
+# MODULE-LEVEL ONLY: these are markings on an assembled 288-pin RDIMM. No die analysis.
+#
+FIXTURE	genuine-skhynix-HMCG94MEBRA109N
+CLASS	genuine-reference
+MPN	HMCG94MEBRA109N
+MANUFACTURER	SK hynix
+MODULE_LABEL	SK hynix
+MODULE_LABEL	HMCG94MEBRA109N
+MODULE_LABEL	64GB 2Rx4 PC5-4800B-RR2-1010-XT
+MODULE_LABEL	SN: AD5B1E09
+MODULE_LABEL	LOT: KR2611C
+MODULE_LABEL	DC: 2611
+MODULE_LABEL	MADE IN KOREA
+BARCODE	Code 128=HMCG94MEBRA109N
+BARCODE	DataMatrix ECC200=1P HMCG94MEBRA109N S AD5B1E09 1T KR2611C
+PKG_MARKING	SK hynix
+PKG_MARKING	H5CG48MEBDX014
+PKG_MARKING	KR2611C
+PKG_MARKING	KOREA
+PKG_FIELD	markingMethod=laser-etched
+PKG_FIELD	componentPartNumber=H5CG48MEBDX014
+PKG_FIELD	glyphProfile=skhynix-laser-v1
+PKG_FIELD	characterPitchMm=0.9
+PKG_FIELD	surfaceFinish=uniform moulded epoxy, no abrasion, consistent gloss
+PKG_FIELD	dieRevisionMarked=M
+SPD	revision=SPD5 hub (SPD5118)
+SPD	moduleManufacturerJep106=0xAD
+SPD	dramManufacturerJep106=0xAD
+SPD	moduleManufacturingLocation=0x02
+SPD	moduleManufacturingDate=2611
+SPD	moduleSerialNumber=AD5B1E09
+SPD	modulePartNumber=HMCG94MEBRA109N
+PCB	revision=B1
+PCB	firstBuildDate=2025-W44
+VALIDATOR	dateCodeRegex=^(2[0-9])(0[1-9]|[1-4][0-9]|5[0-3])$
+VALIDATOR	lotCodeRegex=^[A-Z]{2}[0-9]{4}[A-Z]$
+VALIDATOR	serialRegex=^[0-9A-F]{8}$
+VALIDATOR	issuedSerialRanges=[["A0000000", "AFFFFFFF"]]
+VALIDATOR	allowedComponentPartNumbers=["H5CG48MEBDX014"]
+VALIDATOR	allowedAssemblySites=["KOREA", "CHINA"]
+VALIDATOR	allowedMarkingMethods=["laser-etched"]
+VALIDATOR	requiredSpdFieldsPopulated=["moduleManufacturerJep106", "moduleManufacturingLocation", "moduleManufacturingDate", "moduleSerialNumber", "modulePartNumber"]
+PLAIN	A third genuine example, from the supplier we turned down purely because it could not deliver in time. Its markings are perfectly clean — we said no to the schedule, not to the part.

@@ -1,0 +1,21 @@
+{
+  "sources": [
+    {
+      "title": "Memory suppliers place server DRAM customers on allocation",
+      "url": "https://www.reuters.com/technology/",
+      "snippet": "Suppliers have notified server and ODM customers of reduced allocation on conventional DDR5 server memory as capacity shifts toward high-bandwidth memory for AI accelerators. Affected buyers are being asked to requalify alternate module sources."
+    },
+    {
+      "title": "HBM capacity expansion pressures conventional DRAM output",
+      "url": "https://www.tomshardware.com/",
+      "snippet": "HBM production consumes substantially more wafer area per bit than conventional DRAM, so the AI-driven HBM ramp directly reduces available DDR5 bit supply. Server builders report allocation cuts and extended lead times."
+    },
+    {
+      "title": "Counterfeit and remarked server memory resurfaces in shortage conditions",
+      "url": "https://ercimarketplace.com/",
+      "snippet": "Shortage conditions historically correlate with a rise in remarked and counterfeit memory modules entering the independent distribution channel. Buyers are advised to verify top markings and lot codes against manufacturer references before acceptance."
+    }
+  ],
+  "_fixture": true,
+  "_query": "DDR5 server memory allocation cut supplier HBM capacity shift datacenter DRAM shortage"
+}

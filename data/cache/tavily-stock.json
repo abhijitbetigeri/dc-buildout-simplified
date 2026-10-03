@@ -1,0 +1,16 @@
+{
+  "sources": [
+    {
+      "title": "Distributor stock and quoted lead times — DDR5 RDIMM",
+      "url": "https://www.digikey.com/",
+      "snippet": "Authorised distribution shows limited on-hand quantity for 64GB DDR5-4800 RDIMM with factory lead times quoted in multiples of weeks. Backorder positions are being accepted without firm delivery commitment."
+    },
+    {
+      "title": "Server memory availability and allocation status",
+      "url": "https://www.mouser.com/",
+      "snippet": "Several registered DDR5 server module lines show no stock with scheduled factory deliveries. Where stock exists it is in quantities below typical cluster build volumes."
+    }
+  ],
+  "_fixture": true,
+  "_query": "DDR5 RDIMM 64GB distributor stock availability lead time weeks server memory"
+}

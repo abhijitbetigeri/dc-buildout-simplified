@@ -1,0 +1,62 @@
+# LINEDOWN marking fixture — flat text sidecar.
+# GENERATED from the sibling .json. Edit the .json, not this file.
+# Purpose: the text-match fallback for beat 5. If Moss image embedding is unavailable
+# (MILESTONES.md risk register, M1), every discriminator in beat 5 is still reachable from
+# these lines using string, regex, range and date comparisons alone.
+# Format: TAB-separated. <TAG>\t<value>   — grep-friendly and embedding-friendly.
+# ILLUSTRATIVE: all marking strings, lot codes and serials are fabricated for the demo.
+# MODULE-LEVEL ONLY: these are markings on an assembled 288-pin RDIMM. No die analysis.
+#
+FIXTURE	suspect-broker-lot-PRC-24817
+CLASS	suspect-counterfeit
+CLAIMEDMPN	MTC20F2085S1RC48BA1
+CLAIMEDMANUFACTURER	Micron Technology
+SUPPLIER	Pacific Rim Components Ltd. (HK)
+LOTCODE	PRC-24817
+MODULE_LABEL	MICRON
+MODULE_LABEL	MTC20F2085S1RC48BA1
+MODULE_LABEL	64GB 2Rx4 PC5-4800B-RR1-1010-XT
+MODULE_LABEL	SN: 00000000
+MODULE_LABEL	LOT: PRC24817
+MODULE_LABEL	DC: 2341
+MODULE_LABEL	MADE IN CHINA
+BARCODE	Code 128=MTC20F2085S1RC48BA1
+BARCODE	DataMatrix ECC200=ABSENT
+PKG_MARKING	MT
+PKG_MARKING	D8BQK
+PKG_MARKING	JW 2341
+PKG_MARKING	TAIWAN
+PKG_FIELD	markingMethod=ink-overprint-on-abraded-surface
+PKG_FIELD	fbgaCode=D8BQK
+PKG_FIELD	glyphProfile=generic-sans
+PKG_FIELD	characterPitchMm=1.05
+PKG_FIELD	surfaceFinish=visible sanding swirl, matte patch under marking, gloss mismatch against package edges
+SPD	revision=SPD5 hub (SPD5118)
+SPD	moduleManufacturerJep106=0x2C
+SPD	dramManufacturerJep106=0x2C
+SPD	moduleManufacturingLocation=0x00
+SPD	moduleManufacturingDate=0000
+SPD	moduleSerialNumber=00000000
+SPD	modulePartNumber=MTC20F2085S1RC48BA1
+PCB	revision=E2
+SUBLOT	PRC-24817-A dateCode=2341 units=2304
+SUBLOT	PRC-24817-B dateCode=2354 units=2304
+FINDING	F1 FAIL [critical] fbgaCode in genuine.validators.allowedFbgaCodes | expected=D8BNJ | observed=D8BQK | method=string lookup
+FINDING_PLAIN	F1 The code printed on the chips is not the code this exact part uses.
+FINDING	F2 FAIL [critical] dramDateCode integrity and consistency with modulePcb.firstBuildDate | expected=valid YYWW, not earlier than 2024-W18 (PCB rev E2 first build) | observed=sub-lot A = 2341 (2023 week 41); sub-lot B = 2354 (week 54 does not exist) | method=regex + date comparison
+FINDING_PLAIN	F2 The dates do not add up. One batch says the chips are older than the board they are mounted on. The other batch has a date that cannot exist.
+FINDING	F3 FAIL [critical] markingMethod in genuine.validators.allowedMarkingMethods | expected=laser-etched | observed=ink-overprint-on-abraded-surface | method=string comparison + surface inspection
+FINDING_PLAIN	F3 The original markings were sanded off and new ones printed on top. You can see the scratch marks.
+FINDING	F4 FAIL [high] glyphProfile and characterPitchMm match genuine reference | expected=micron-laser-v3, pitch 0.92mm | observed=generic-sans, pitch 1.05mm | method=string comparison + measured pitch
+FINDING_PLAIN	F4 The lettering is the wrong font and the wrong size.
+FINDING	F5 FAIL [critical] moduleSerialNumber matches serialRegex and falls inside issuedSerialRanges; DataMatrix present | expected=8 hex chars within an issued range, plus a readable DataMatrix | observed=serial 00000000 (outside every issued range), DataMatrix absent | method=regex + range check
+FINDING_PLAIN	F5 There is no serial number the manufacturer can look up, and the square tracking code is missing entirely. Every stick we checked had the same blank serial.
+FINDING	F6 FAIL [critical] all genuine.validators.requiredSpdFieldsPopulated are non-zero | expected=manufacturer, location, date, serial and part number all populated and consistent | observed=moduleManufacturerJep106 = 0x2C (correct) but location 0x00, date 0000, serial 00000000 all blank | method=SPD byte read
+FINDING_PLAIN	F6 The stick's internal data chip says 'Micron' but has no record of where or when it was actually made. Those details are written at the factory, so their absence means this stick did not come off that factory's line.
+SIMILARITY	ref-remarked-cluster-A=0.93
+SIMILARITY	ref-genuine-micron-MTC20F2085S1RC48BA1=0.41
+SIMILARITY	ref-genuine-samsung-M321R8GA0BB0-CQK=0.18
+VERDICT	COUNTERFEIT — REMARKED MODULE
+VERDICT_CONFIDENCE	high — six independent discriminators, three of them individually sufficient
+VERDICT_PLAIN	Fake. Six separate checks all failed, and any one of three of them would have been enough on its own. Refusing this lot looks like giving up a $364,000 discount — it actually avoids about $1.07M in scrapped parts and rebuilt servers, so the decision is roughly $702,000 better.
+PLAIN	A middleman offered us thousands of the exact part we are short of, immediately, at 29% below our normal price. The markings on the chips were sanded off and reprinted. These are not the part they claim to be, and we cannot tell what is actually inside them.

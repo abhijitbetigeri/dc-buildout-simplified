@@ -1,0 +1,51 @@
+# LINEDOWN marking fixture — flat text sidecar.
+# GENERATED from the sibling .json. Edit the .json, not this file.
+# Purpose: the text-match fallback for beat 5. If Moss image embedding is unavailable
+# (MILESTONES.md risk register, M1), every discriminator in beat 5 is still reachable from
+# these lines using string, regex, range and date comparisons alone.
+# Format: TAB-separated. <TAG>\t<value>   — grep-friendly and embedding-friendly.
+# ILLUSTRATIVE: all marking strings, lot codes and serials are fabricated for the demo.
+# MODULE-LEVEL ONLY: these are markings on an assembled 288-pin RDIMM. No die analysis.
+#
+FIXTURE	genuine-micron-MTC20F2085S1RC48BA1
+CLASS	genuine-reference
+MPN	MTC20F2085S1RC48BA1
+MANUFACTURER	Micron Technology
+MODULE_LABEL	MICRON
+MODULE_LABEL	MTC20F2085S1RC48BA1
+MODULE_LABEL	64GB 2Rx4 PC5-4800B-RR1-1010-XT
+MODULE_LABEL	SN: 7A3E91C4
+MODULE_LABEL	LOT: JW2502A
+MODULE_LABEL	DC: 2502
+MODULE_LABEL	ASSEMBLED IN TAIWAN
+BARCODE	Code 128=MTC20F2085S1RC48BA1
+BARCODE	DataMatrix ECC200=1P MTC20F2085S1RC48BA1 S 7A3E91C4 1T JW2502A
+PKG_MARKING	MT
+PKG_MARKING	D8BNJ
+PKG_MARKING	JW 2502
+PKG_MARKING	TAIWAN
+PKG_FIELD	markingMethod=laser-etched
+PKG_FIELD	fbgaCode=D8BNJ
+PKG_FIELD	glyphProfile=micron-laser-v3
+PKG_FIELD	characterPitchMm=0.92
+PKG_FIELD	surfaceFinish=uniform moulded epoxy, no abrasion, consistent gloss
+SPD	revision=SPD5 hub (SPD5118)
+SPD	moduleManufacturerJep106=0x2C
+SPD	dramManufacturerJep106=0x2C
+SPD	moduleManufacturingLocation=0x06
+SPD	moduleManufacturingDate=2502
+SPD	moduleSerialNumber=7A3E91C4
+SPD	modulePartNumber=MTC20F2085S1RC48BA1
+PCB	revision=E2
+PCB	firstBuildDate=2024-W18
+VALIDATOR	dateCodeRegex=^(2[0-9])(0[1-9]|[1-4][0-9]|5[0-3])$
+VALIDATOR	dateCodeFormat=YYWW — 2-digit year, 2-digit ISO week. Week 00 and weeks 54+ do not exist.
+VALIDATOR	lotCodeRegex=^[A-Z]{2}[0-9]{4}[A-Z]$
+VALIDATOR	lotCodeFormat=2-letter fab/assembly site + YYWW + single-letter sub-lot
+VALIDATOR	serialRegex=^[0-9A-F]{8}$
+VALIDATOR	issuedSerialRanges=[["70000000", "7FFFFFFF"], ["A0000000", "AFFFFFFF"]]
+VALIDATOR	allowedFbgaCodes=["D8BNJ"]
+VALIDATOR	allowedAssemblySites=["TAIWAN", "SINGAPORE"]
+VALIDATOR	allowedMarkingMethods=["laser-etched"]
+VALIDATOR	requiredSpdFieldsPopulated=["moduleManufacturerJep106", "moduleManufacturingLocation", "moduleManufacturingDate", "moduleSerialNumber", "modulePartNumber"]
+PLAIN	This is what a real one looks like. The codes printed on the chips are burned in with a laser, every number agrees with every other number, and the sticker carries a serial the manufacturer can trace.

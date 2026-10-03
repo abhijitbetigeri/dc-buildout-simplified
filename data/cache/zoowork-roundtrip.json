@@ -1,0 +1,110 @@
+{
+  "startedAt": "2026-10-03T22:52:17.081Z",
+  "model": "litellm/gpt-5.6-terra",
+  "agentId": "agt_01m41zfqvj9sv563mc4n14nhfq",
+  "sessionId": "12195515e013484092868ed3d77a9c24",
+  "whileUnresolved": [
+    {
+      "atSeconds": 1,
+      "pendingCount": 1,
+      "pendingIds": [
+        "ctc_01M41ZFXZ7TVAS1YXZTFATSAY2"
+      ],
+      "run_status": "awaiting_approval",
+      "pending_custom_tool_calls": 1
+    },
+    {
+      "atSeconds": 3,
+      "pendingCount": 1,
+      "pendingIds": [
+        "ctc_01M41ZFXZ7TVAS1YXZTFATSAY2"
+      ],
+      "run_status": "awaiting_approval",
+      "pending_custom_tool_calls": 1
+    },
+    {
+      "atSeconds": 5,
+      "pendingCount": 1,
+      "pendingIds": [
+        "ctc_01M41ZFXZ7TVAS1YXZTFATSAY2"
+      ],
+      "run_status": "awaiting_approval",
+      "pending_custom_tool_calls": 1
+    }
+  ],
+  "verdict": {
+    "decision": "block",
+    "result": "not-listed",
+    "reason": "Not on platform QVL for AI-SRV-G4 (QVL-G4-2026.08-rev-D). Spec-compatible on all 5 platform requirements MATCH (64 / 4800 / 2Rx4 / RDIMM / 1.1V), but EVAL-G4-0412 is incomplete — incomplete."
+  },
+  "resolveReceipts": [
+    {
+      "callId": "ctc_01M41ZFXZ7TVAS1YXZTFATSAY2",
+      "status": "pending",
+      "signaled": true
+    }
+  ],
+  "result": "VERIFIED",
+  "haltProven": true,
+  "resumeProven": true,
+  "sawResolved": true,
+  "outcome": "succeeded",
+  "assistantAfterResolve": "**Decision: BLOCK** — candidate **cand-01** (V-color Technology **TRA564G48D436O**) is **not listed on the AI-SRV-G4 QVL** (QVL-G4-2026.08-rev-D).\n\n- **Specs:** all 5 platform requirements match: 64GB / 4800 MT/s / 2Rx4 / RDIMM / 1.1V  \n- **Evaluation:** `EVAL-G4-0412` — **incomplete**\n- **Tool reason:** Spec-compatible, but not qualified or fully tested for this platform.\n\nQualified alternatives:\n- Micron `MTC20F2085S1RC48BA1`\n- Samsung `M321R8GA0BB0-CQK`\n- SK hynix `HMCG94MEBRA109N`\n- Kingston `KSM48R40BD4TMM-64HMR`\n- SK hynix `HMCG94AGBRA109N`",
+  "transcript": [
+    "── 1. listModels() and select the primary chat default ──",
+    "   catalog rows: 42",
+    "   chosen model: litellm/gpt-5.6-terra  (selectable=true, default_for=[\"model\",\"pdfModel\"])",
+    "",
+    "── 2. createAgent() with agents/defs.ts ENGINEERING (custom_tools: qvl_lookup) ──",
+    "   agent_id: agt_01m41zfqvj9sv563mc4n14nhfq",
+    "   config_version: 3",
+    "",
+    "── 3. startAgent() + waitUntilRunning() ──",
+    "   desired_state: running",
+    "",
+    "── 4. createSession() with a message that requires qvl_lookup ──",
+    "   session_id: 12195515e013484092868ed3d77a9c24",
+    "",
+    "── 5. stream until agent.custom_tool_use / requested ──",
+    "   REQUESTED  tool=qvl_lookup  callId=ctc_01M41ZFXZ7TVAS1YXZTFATSAY2",
+    "   input: {\"mpn\":\"TRA564G48D436O\",\"specs\":{\"speed\":\"4800 MT/s\",\"voltage\":\"1.1V\",\"capacity\":\"64GB\",\"formFactor\":\"RDIMM 288-pin\",\"manufacturer\":\"V-color Technology\",\"organization\":\"2Rx4\"},\"candidateId\":\"cand-01\"}",
+    "   timeoutAt: 2026-10-03T22:53:24.934Z",
+    "",
+    "── 6. THE PROOF — deliberately NOT resolving for ~5s (inside the tool budget) ──",
+    "   t+1.9s  pending=1 [\"ctc_01M41ZFXZ7TVAS1YXZTFATSAY2\"]  run_status=awaiting_approval  pending_custom_tool_calls=1",
+    "   t+4.6s  pending=1 [\"ctc_01M41ZFXZ7TVAS1YXZTFATSAY2\"]  run_status=awaiting_approval  pending_custom_tool_calls=1",
+    "   t+7.3s  pending=1 [\"ctc_01M41ZFXZ7TVAS1YXZTFATSAY2\"]  run_status=awaiting_approval  pending_custom_tool_calls=1",
+    "",
+    "   call remained PENDING across all probes: YES",
+    "   → while pending, run_status was \"awaiting_approval\" — the run was NOT progressing.",
+    "",
+    "── 7. resolveCustomToolCall() with the verdict from tools/qvl.ts#checkQvl ──",
+    "   QVL source: data/qvl.json",
+    "   verdict: decision=block result=not-listed onQvl=false specsMatch=true",
+    "   reason: Not on platform QVL for AI-SRV-G4 (QVL-G4-2026.08-rev-D). Spec-compatible on all 5 platform requirements MATCH (64 / 4800 / 2Rx4 / RDIMM / 1.1V), but EVAL-G4-04",
+    "   resolving 1 pending call(s): [\"ctc_01M41ZFXZ7TVAS1YXZTFATSAY2\"]",
+    "   receipt: callId=ctc_01M41ZFXZ7TVAS1YXZTFATSAY2 status=pending signaled=true",
+    "",
+    "── 8. resume the stream from the cursor and watch the run finish ──",
+    "   RESOLVED   callId=ctc_01M41ZFXZ7TVAS1YXZTFATSAY2 outcome=completed resolvedBy=linedown-agents-backend",
+    "   run finished — outcome succeeded",
+    "",
+    "── assistant text after resolution ──",
+    "**Decision: BLOCK** — candidate **cand-01** (V-color Technology **TRA564G48D436O**) is **not listed on the AI-SRV-G4 QVL** (QVL-G4-2026.08-rev-D).\n\n- **Specs:** all 5 platform requirements match: 64GB / 4800 MT/s / 2Rx4 / RDIMM / 1.1V  \n- **Evaluation:** `EVAL-G4-0412` — **incomplete**\n- **Tool reason:** Spec-compatible, but not qualified or fully tested for this platform.\n\nQualified alternatives:\n- Micron `MTC20F2085S1RC48BA1`\n- Samsung `M321R8GA0BB0-CQK`\n- SK hynix `HMCG94MEBRA109N`\n- Kingston `KSM48R40BD4TMM-64HMR`\n- SK hynix `HMCG94AGBRA109N`",
+    "",
+    "════════════════════════════════════════════════════════════════",
+    "HALT   : VERIFIED",
+    "  · the run requested qvl_lookup and stopped progressing",
+    "  · run_status held at \"awaiting_approval\" with pending_custom_tool_calls=1",
+    "  · it stayed that way across every probe while we withheld the answer",
+    "RESUME : VERIFIED",
+    "  · resolveCustomToolCall was accepted, the run resumed and finished \"succeeded\"",
+    "  · the assistant reported the verdict OUR backend supplied (block / not-listed)",
+    "  · that value came from tools/qvl.ts#checkQvl against the real QVL",
+    "════════════════════════════════════════════════════════════════",
+    "",
+    "── cleanup ──",
+    "   stopped",
+    "   deleted"
+  ]
+}

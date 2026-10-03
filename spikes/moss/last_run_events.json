@@ -1,0 +1,139 @@
+[
+  {
+    "type": "tool.result",
+    "payload": {
+      "callId": "c-moss-1",
+      "kind": "moss.partmatch",
+      "payload": {
+        "query": "MTC20F2085S1RC48BA1",
+        "equivalents": [
+          {
+            "mpn": "HMCG94MEBRA123N",
+            "vendor": "SK hynix",
+            "score": 0.737,
+            "specs": {
+              "capacity": "64GB",
+              "type": "DDR5 RDIMM",
+              "speed": "4800 MT/s",
+              "rank": "2Rx4",
+              "cas": "CL40",
+              "voltage": "1.1V",
+              "ecc": "ECC Registered",
+              "height": "31.25mm"
+            },
+            "pricePerUnit": 329.0,
+            "leadTimeWeeks": 9,
+            "onQvl": true
+          },
+          {
+            "mpn": "AB64GR48C4-MBHJ",
+            "vendor": "ATP / grey-market broker",
+            "score": 0.7002,
+            "specs": {
+              "capacity": "64GB",
+              "type": "DDR5 RDIMM",
+              "speed": "4800 MT/s",
+              "rank": "2Rx4",
+              "cas": "CL40",
+              "voltage": "1.1V",
+              "ecc": "ECC Registered",
+              "height": "31.25mm"
+            },
+            "pricePerUnit": 198.0,
+            "leadTimeWeeks": 1,
+            "onQvl": false
+          },
+          {
+            "mpn": "KSM48R40BD4TMM-64HMR",
+            "vendor": "Kingston",
+            "score": 0.6966,
+            "specs": {
+              "capacity": "64GB",
+              "type": "DDR5 RDIMM",
+              "speed": "4800 MT/s",
+              "rank": "2Rx4",
+              "cas": "CL40",
+              "voltage": "1.1V",
+              "ecc": "ECC Registered",
+              "height": "31.25mm"
+            },
+            "pricePerUnit": 274.0,
+            "leadTimeWeeks": 2,
+            "onQvl": false
+          },
+          {
+            "mpn": "M321R8GA0BB0-CQK",
+            "vendor": "Samsung",
+            "score": 0.6965,
+            "specs": {
+              "capacity": "64GB",
+              "type": "DDR5 RDIMM",
+              "speed": "4800 MT/s",
+              "rank": "2Rx4",
+              "cas": "CL40",
+              "voltage": "1.1V",
+              "ecc": "ECC Registered",
+              "height": "31.25mm"
+            },
+            "pricePerUnit": 341.0,
+            "leadTimeWeeks": 6,
+            "onQvl": true
+          }
+        ],
+        "latencyMs": 0.23
+      }
+    }
+  },
+  {
+    "type": "tool.result",
+    "payload": {
+      "callId": "c-moss-2",
+      "kind": "moss.matches",
+      "payload": {
+        "matches": [
+          {
+            "id": "mark-samsung-remarked",
+            "label": "Broker unit \u2014 REMARKED, claims -CQK",
+            "score": 0.8753,
+            "thumbnail": "data/markings/broker-unit-remarked.jpg",
+            "kind": "known_counterfeit",
+            "mpn": "M321R8GA0BB0-CQK"
+          },
+          {
+            "id": "mark-samsung-genuine",
+            "label": "Samsung M321R8GA0BB0-CQK \u2014 genuine reference",
+            "score": 0.8073,
+            "thumbnail": "data/markings/samsung-cqk-genuine.jpg",
+            "kind": "known_good",
+            "mpn": "M321R8GA0BB0-CQK"
+          },
+          {
+            "id": "mark-hynix-genuine",
+            "label": "SK hynix HMCG94MEBRA123N \u2014 genuine reference",
+            "score": 0.3028,
+            "thumbnail": "data/markings/hynix-a123n-genuine.jpg",
+            "kind": "known_good",
+            "mpn": "HMCG94MEBRA123N"
+          }
+        ],
+        "latencyMs": 0.2,
+        "queryText": "SAMSUNG 964 M321R8GA0BB0-CQK K4RAH086VB-BCPB SEC 2402 GTP690 MADE IN KOREA 64GB 2Rx4 PC5-4800B-RB0-1010-XT",
+        "resolvedVia": "fixture-table",
+        "verdict": "counterfeit",
+        "topScore": 0.8753
+      }
+    }
+  },
+  {
+    "type": "counterfeit.flagged",
+    "payload": {
+      "candidateId": "cand-broker-atp",
+      "imageA": "data/markings/broker-unit-remarked.jpg",
+      "imageB": "data/markings/samsung-cqk-genuine.jpg",
+      "score": 0.8753,
+      "latencyMs": 0.2,
+      "reason": "Top-marking matches known-counterfeit reference 'mark-samsung-remarked' at 88% similarity. FBGA die code and lot-code format disagree with the module label.",
+      "plain": "The chips on this module do not match the label on it. Someone sanded off the old markings and re-printed faster ones. These would fail in the field, and the cluster would come down with them."
+    }
+  }
+]

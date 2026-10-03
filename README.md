@@ -22,8 +22,8 @@ server DDR5 got scarce. This is how a manufacturer buys through it.
 5. A broker offer looks too good. Photograph the module's chip markings → **Moss** matches a
    remarked/counterfeit pattern → rejected.
 6. A qualified alternate is approved by a human, with one click. PO drafted.
-7. **Entire** commits the QVL change with the full agent session attached. `entire blame`
-   answers the auditor six months later.
+7. **Entire** commits the QVL change with the full agent session attached. `entire why`
+   prints the prompt behind the decision — the answer an auditor needs six months later.
 
 ## Stack
 
@@ -32,7 +32,7 @@ server DDR5 got scarce. This is how a manufacturer buys through it.
 | **ZooWork** | Hosts every agent. Agent → Session → Events; the event stream is what the UI renders. |
 | **Moss** | On-device multimodal search: part-number equivalence and chip-marking matching. |
 | **Tavily** | Spot pricing, distributor stock, lead times, allocation news. |
-| **BAND** | The room — agents across company lines, with a Critic that can block. |
+| **BAND** | The room — agents across company lines. (BAND has no veto primitive; the blocking gate is ZooWork's `custom_tools`, which halts the run inside the runtime until our backend resolves it.) |
 | **Entire** | Session-attached commits. Git tells you what changed; Entire tells you why. |
 
 ## Run it

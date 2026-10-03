@@ -1,0 +1,613 @@
+[
+  {
+    "id": "e001",
+    "ts": 0,
+    "type": "alert.raised",
+    "payload": {
+      "part": "MTC20F2085S1RC48BA1",
+      "partLabel": "64GB DDR5-4800 RDIMM · 2Rx4",
+      "program": "AI-SRV-G4 — 480 node cluster",
+      "qtyAtRisk": 11520,
+      "burnRatePerMin": 8400,
+      "deadlineLabel": "Ship date in 11 days",
+      "reason": "Supplier cut allocation 40% — HBM capacity reassignment",
+      "plain": "The memory we planned to build with just got cut by 40%. Every hour we do not have a fix, the line stands still and the ship date slips."
+    }
+  },
+  {
+    "id": "e002",
+    "ts": 1800,
+    "type": "agent.message",
+    "payload": {
+      "agent": "intake",
+      "role": "Intake",
+      "text": "Allocation notice from Micron received 06:14 PT. Confirmed against open POs: 11,520 units short across 480 nodes (24 DIMM slots/node). Program AI-SRV-G4 is the only consumer of this MPN.",
+      "plain": "We checked. This shortage only affects one product line, and we are short 11,520 memory modules."
+    }
+  },
+  {
+    "id": "e003",
+    "ts": 3600,
+    "type": "agent.message",
+    "payload": {
+      "agent": "sourcing",
+      "role": "Sourcing",
+      "text": "Opening a sourcing case. First question is whether this is a Micron-specific cut or a market-wide squeeze — that determines whether we substitute vendor or renegotiate allocation.",
+      "plain": "Before we go shopping, we need to know if this is one supplier's problem or everybody's problem."
+    }
+  },
+  {
+    "id": "e004",
+    "ts": 5200,
+    "type": "tool.call",
+    "payload": {
+      "callId": "t1",
+      "agent": "sourcing",
+      "tool": "tavily",
+      "label": "Pulling DDR5 RDIMM spot pricing and allocation news",
+      "status": "running"
+    }
+  },
+  {
+    "id": "e005",
+    "ts": 9400,
+    "type": "tool.result",
+    "payload": {
+      "callId": "t1",
+      "kind": "tavily.sources",
+      "payload": {
+        "sources": [
+          {
+            "title": "DDR5 server DRAM contract prices up 28% QoQ as HBM absorbs wafer capacity",
+            "url": "https://www.trendforce.com/presscenter/news/ddr5-server-dram-q4",
+            "snippet": "Suppliers have reallocated mature-node capacity toward HBM3E, tightening conventional RDIMM supply. Q4 server DRAM contract pricing rose 28% quarter on quarter, with 64GB RDIMM the most affected density."
+          },
+          {
+            "title": "Micron notifies server ODMs of DDR5 RDIMM allocation reductions",
+            "url": "https://www.digitimes.com/news/micron-ddr5-rdimm-allocation",
+            "snippet": "Multiple tier-1 ODMs report allocation cuts of 30-45% on 64GB DDR5-4800 modules effective immediately, with no restoration date committed."
+          },
+          {
+            "title": "64GB DDR5-4800 RDIMM spot index — 7 day movement",
+            "url": "https://www.dramexchange.com/spot/ddr5-rdimm-64gb",
+            "snippet": "Spot bid/ask widened to $286 / $341 per module. Authorized distributor stock reported at under 3 weeks of coverage. Open-market offers below $230 are being flagged for provenance."
+          },
+          {
+            "title": "Counterfeit remarked DDR5 modules in Asian open market — ERAI alert",
+            "url": "https://www.erai.com/alerts/ddr5-remarked-rdimm",
+            "snippet": "Members report DDR4 and low-bin DDR5 die remarked with 4800 MT/s part numbers. Indicators include lot-code format drift and low-resolution laser marking on the module label."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "e006",
+    "ts": 11200,
+    "type": "agent.message",
+    "payload": {
+      "agent": "sourcing",
+      "role": "Sourcing",
+      "text": "Market-wide. Contract up 28% QoQ, authorized stock under 3 weeks of coverage. Renegotiating allocation will not close an 11-day gap. We substitute at module level.",
+      "plain": "This is everyone's problem, so asking our supplier nicely will not work. We need to find a different module that does the same job."
+    }
+  },
+  {
+    "id": "e007",
+    "ts": 13400,
+    "type": "agent.message",
+    "payload": {
+      "agent": "market",
+      "role": "Market",
+      "text": "Noting for the record: no indication of price relief inside the build window. Waiting is strictly worse than buying. Do not hold out for a correction.",
+      "plain": "Prices are not going to drop before we have to build. Waiting would only cost more."
+    }
+  },
+  {
+    "id": "e008",
+    "ts": 15000,
+    "type": "agent.message",
+    "payload": {
+      "agent": "engineering",
+      "role": "Engineering",
+      "text": "Decode the MPN before anyone quotes anything. 2Rx4 organisation and RCD vendor matter more than the headline speed grade on this platform.",
+      "plain": "A module that looks identical on paper can still be wired differently inside. Let us read the part number properly first."
+    }
+  },
+  {
+    "id": "e009",
+    "ts": 16500,
+    "type": "tool.call",
+    "payload": {
+      "callId": "t2",
+      "agent": "engineering",
+      "tool": "moss",
+      "label": "Decoding MPN → cross-vendor module equivalents",
+      "status": "running"
+    }
+  },
+  {
+    "id": "e010",
+    "ts": 18200,
+    "type": "tool.result",
+    "payload": {
+      "callId": "t2",
+      "kind": "moss.partmatch",
+      "payload": {
+        "query": "MTC20F2085S1RC48BA1",
+        "latencyMs": 7,
+        "equivalents": [
+          {
+            "mpn": "HMCG94AGBRA123N",
+            "vendor": "SK hynix",
+            "score": 0.97,
+            "specs": {
+              "density": "64GB",
+              "speed": "DDR5-4800",
+              "org": "2Rx4",
+              "form": "RDIMM",
+              "rcd": "Montage M88RCD02"
+            }
+          },
+          {
+            "mpn": "M321R8GA0BB0-CQK",
+            "vendor": "Samsung",
+            "score": 0.96,
+            "specs": {
+              "density": "64GB",
+              "speed": "DDR5-4800",
+              "org": "2Rx4",
+              "form": "RDIMM",
+              "rcd": "Rambus RCD"
+            }
+          },
+          {
+            "mpn": "MTC40F2046S1RC48BA1",
+            "vendor": "Micron",
+            "score": 0.99,
+            "specs": {
+              "density": "64GB",
+              "speed": "DDR5-4800",
+              "org": "2Rx4",
+              "form": "RDIMM",
+              "rcd": "Micron RCD (same die revision)"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "e011",
+    "ts": 20000,
+    "type": "agent.message",
+    "payload": {
+      "agent": "engineering",
+      "role": "Engineering",
+      "text": "Three module-level equivalents. All 64GB 2Rx4 DDR5-4800 RDIMM. Note this is a module substitution, not an HBM substitution — HBM has no alternates. Loading candidates.",
+      "plain": "Three real alternatives exist, and all three match the electrical spec. (The chips causing the shortage have no alternatives — but the modules we buy do.)"
+    }
+  },
+  {
+    "id": "e012",
+    "ts": 21500,
+    "type": "candidate.added",
+    "payload": {
+      "id": "c1",
+      "mpn": "HMCG94AGBRA123N",
+      "vendor": "SK hynix",
+      "specs": {
+        "density": "64GB",
+        "speed": "DDR5-4800",
+        "org": "2Rx4",
+        "rcd": "Montage M88RCD02"
+      },
+      "pricePerUnit": 286,
+      "leadTimeWeeks": 3,
+      "source": "Authorized distributor — Arrow"
+    }
+  },
+  {
+    "id": "e013",
+    "ts": 22600,
+    "type": "candidate.added",
+    "payload": {
+      "id": "c3",
+      "mpn": "M321R8GA0BB0-CQK",
+      "vendor": "Samsung",
+      "specs": {
+        "density": "64GB",
+        "speed": "DDR5-4800",
+        "org": "2Rx4",
+        "rcd": "Rambus RCD"
+      },
+      "pricePerUnit": 318,
+      "leadTimeWeeks": 8,
+      "source": "Authorized distributor — Avnet"
+    }
+  },
+  {
+    "id": "e014",
+    "ts": 23700,
+    "type": "candidate.added",
+    "payload": {
+      "id": "c4",
+      "mpn": "MTC40F2046S1RC48BA1",
+      "vendor": "Micron",
+      "specs": {
+        "density": "64GB",
+        "speed": "DDR5-4800",
+        "org": "2Rx4",
+        "rcd": "Micron RCD (same die rev)"
+      },
+      "pricePerUnit": 332,
+      "leadTimeWeeks": 2,
+      "source": "Authorized distributor — Arrow · 12,400 in stock"
+    }
+  },
+  {
+    "id": "e015",
+    "ts": 26000,
+    "type": "agent.message",
+    "payload": {
+      "agent": "sourcing",
+      "role": "Sourcing",
+      "text": "Unsolicited offer inbound from an open-market broker: 12,000 units of the original Micron MPN, ex-stock Shenzhen, $214/unit, 1 week. That is $72 under the authorized floor on a part nobody has.",
+      "plain": "A trader we do not know is offering exactly the part we need, cheaper and faster than anyone else. That is the part that should make you suspicious."
+    }
+  },
+  {
+    "id": "e016",
+    "ts": 27500,
+    "type": "candidate.added",
+    "payload": {
+      "id": "c2",
+      "mpn": "MTC20F2085S1RC48BA1",
+      "vendor": "Micron (claimed)",
+      "specs": {
+        "density": "64GB",
+        "speed": "DDR5-4800",
+        "org": "2Rx4",
+        "lot": "KR4821-B07"
+      },
+      "pricePerUnit": 214,
+      "leadTimeWeeks": 1,
+      "source": "Open-market broker — unaudited"
+    }
+  },
+  {
+    "id": "e017",
+    "ts": 29000,
+    "type": "candidate.status",
+    "payload": {
+      "id": "c1",
+      "status": "evaluating",
+      "reason": "Pending QVL check",
+      "plain": "Checking whether this one has been tested on our server."
+    }
+  },
+  {
+    "id": "e018",
+    "ts": 30000,
+    "type": "candidate.status",
+    "payload": {
+      "id": "c3",
+      "status": "evaluating",
+      "reason": "Pending lead-time feasibility",
+      "plain": "Checking whether this one can arrive in time."
+    }
+  },
+  {
+    "id": "e019",
+    "ts": 31000,
+    "type": "candidate.status",
+    "payload": {
+      "id": "c4",
+      "status": "evaluating",
+      "reason": "Pending QVL check",
+      "plain": "Checking whether this one has been tested on our server."
+    }
+  },
+  {
+    "id": "e020",
+    "ts": 32000,
+    "type": "candidate.status",
+    "payload": {
+      "id": "c2",
+      "status": "evaluating",
+      "reason": "Pending provenance verification",
+      "plain": "Checking whether this one is genuine."
+    }
+  },
+  {
+    "id": "e021",
+    "ts": 35000,
+    "type": "agent.message",
+    "payload": {
+      "agent": "engineering",
+      "role": "Engineering",
+      "text": "Running all four against the AI-SRV-G4 Qualified Vendor List. QVL is the published set of memory modules this platform has actually been validated with — signal integrity, thermals, RCD training, the full matrix.",
+      "plain": "A QVL is the list of memory our server has been tested and proven to work with. Anything not on it is unproven on this machine."
+    }
+  },
+  {
+    "id": "e022",
+    "ts": 37000,
+    "type": "tool.call",
+    "payload": {
+      "callId": "t3",
+      "agent": "engineering",
+      "tool": "zoodata",
+      "label": "Reading AI-SRV-G4 qualified vendor list (rev 11)",
+      "status": "running"
+    }
+  },
+  {
+    "id": "e023",
+    "ts": 40000,
+    "type": "block.raised",
+    "payload": {
+      "agent": "engineering",
+      "candidateId": "c1",
+      "reason": "Not on platform QVL for AI-SRV-G4 — Montage M88RCD02 register never validated against this BMC memory training profile",
+      "plain": "This supplier's module was never tested on this server. It is the cheapest option we can actually buy, and we are refusing it anyway — because an untested module can take down a 480-node cluster after it has shipped."
+    }
+  },
+  {
+    "id": "e024",
+    "ts": 41500,
+    "type": "candidate.status",
+    "payload": {
+      "id": "c1",
+      "status": "blocked",
+      "reason": "Not on platform QVL (rev 11)",
+      "plain": "Blocked. Never tested on this server."
+    }
+  },
+  {
+    "id": "e025",
+    "ts": 43500,
+    "type": "agent.message",
+    "payload": {
+      "agent": "sourcing",
+      "role": "Sourcing",
+      "text": "Accepted. That was $530k of apparent saving and Engineering has the authority to refuse it. Noted in the case file with the reason attached.",
+      "plain": "Sourcing wanted the cheap one. Engineering said no, and Engineering wins. The reason is written down so an auditor can see it later."
+    }
+  },
+  {
+    "id": "e026",
+    "ts": 45500,
+    "type": "candidate.status",
+    "payload": {
+      "id": "c3",
+      "status": "rejected",
+      "reason": "8 week lead time vs 11 day ship date — infeasible",
+      "plain": "Rejected. It is on the approved list, but it would arrive seven weeks after we have to ship."
+    }
+  },
+  {
+    "id": "e027",
+    "ts": 48000,
+    "type": "agent.message",
+    "payload": {
+      "agent": "sourcing",
+      "role": "Sourcing",
+      "text": "Broker lot is now the only thing that beats the ship date on price. I asked for photographs of the actual modules in stock before we go further. They sent one.",
+      "plain": "The suspiciously cheap offer is now the tempting one. So we asked the trader to photograph the actual parts."
+    }
+  },
+  {
+    "id": "e028",
+    "ts": 50000,
+    "type": "agent.message",
+    "payload": {
+      "agent": "quality",
+      "role": "Quality",
+      "text": "Running the submitted module label against our known-good reference for lot family KR48xx. On-device visual match — the photograph does not leave this machine.",
+      "plain": "We are comparing their photo to a photo of a module we know is real. The comparison happens on this computer, not in the cloud."
+    }
+  },
+  {
+    "id": "e029",
+    "ts": 51500,
+    "type": "tool.call",
+    "payload": {
+      "callId": "t4",
+      "agent": "quality",
+      "tool": "moss",
+      "label": "Matching module label against known-good reference",
+      "status": "running"
+    }
+  },
+  {
+    "id": "e030",
+    "ts": 53500,
+    "type": "tool.result",
+    "payload": {
+      "callId": "t4",
+      "kind": "moss.matches",
+      "payload": {
+        "latencyMs": 6,
+        "matches": [
+          {
+            "id": "m1",
+            "label": "Micron KR4812 — verified genuine",
+            "score": 0.41,
+            "thumbnail": "/img/mod-genuine-a.svg"
+          },
+          {
+            "id": "m2",
+            "label": "Micron KR4819 — verified genuine",
+            "score": 0.38,
+            "thumbnail": "/img/mod-genuine-b.svg"
+          },
+          {
+            "id": "m3",
+            "label": "ERAI remark pattern RX-114",
+            "score": 0.93,
+            "thumbnail": "/img/mod-remark.svg"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "e031",
+    "ts": 56000,
+    "type": "counterfeit.flagged",
+    "payload": {
+      "candidateId": "c2",
+      "imageA": "/img/label-submitted.svg",
+      "imageB": "/img/label-reference.svg",
+      "score": 0.41,
+      "latencyMs": 8,
+      "reason": "Label geometry mismatch vs known-good KR48xx family: lot code uses 'KR4821-B07' (hyphenated suffix never used by this fab), DMC barcode module count 22x22 vs expected 26x26, and laser mark stroke weight is inconsistent with Micron's marking equipment. Matches ERAI remark pattern RX-114 at 0.93.",
+      "plain": "These two labels should be identical. They are not. The serial number is formatted wrong, the barcode has fewer dots than a real one, and the printing is the wrong thickness. These modules are relabelled fakes."
+    }
+  },
+  {
+    "id": "e032",
+    "ts": 58500,
+    "type": "candidate.status",
+    "payload": {
+      "id": "c2",
+      "status": "rejected",
+      "reason": "Counterfeit — remarked module, ERAI pattern RX-114",
+      "plain": "Rejected. These are fakes with a genuine part number printed on them."
+    }
+  },
+  {
+    "id": "e033",
+    "ts": 61000,
+    "type": "agent.message",
+    "payload": {
+      "agent": "quality",
+      "role": "Quality",
+      "text": "11,520 remarked modules would have passed goods-in and failed in the field at customer sites. Exposure avoided: $2.47M of scrap plus the rebuy, plus a recall against a named cluster.",
+      "plain": "If we had bought these, they would have looked fine at delivery and broken later at the customer. That is the expensive kind of mistake."
+    }
+  },
+  {
+    "id": "e034",
+    "ts": 64000,
+    "type": "agent.message",
+    "payload": {
+      "agent": "engineering",
+      "role": "Engineering",
+      "text": "MTC40F2046S1RC48BA1 is on QVL rev 11 as a qualified alternate — same fab, same die revision, same RCD, 2Rx4. No re-validation campaign required. Engineering signs off.",
+      "plain": "One option is already on the tested-and-approved list. We can use it immediately without months of testing."
+    }
+  },
+  {
+    "id": "e035",
+    "ts": 66000,
+    "type": "agent.message",
+    "payload": {
+      "agent": "sourcing",
+      "role": "Sourcing",
+      "text": "12,400 units confirmed in authorized distributor stock, 2 week lead, $332/unit. $46/unit over the blocked SK hynix line and it holds the ship date. Requesting human authorisation to draft the PO.",
+      "plain": "The approved part is in stock and arrives in time. It costs a bit more. A person needs to say yes before we spend the money."
+    }
+  },
+  {
+    "id": "e036",
+    "ts": 68000,
+    "type": "approval.requested",
+    "payload": {
+      "candidateId": "c4",
+      "summary": "Buy 11,520 × MTC40F2046S1RC48BA1 (Micron, QVL rev 11 qualified alternate) at $332/unit — $3,824,640. 2 week lead holds the 11-day ship date with 3 days of float. Avoids a $2.47M counterfeit lot and an untested module on a 480-node cluster.",
+      "savingsVsBroker": 2465280
+    }
+  },
+  {
+    "id": "e037",
+    "ts": 70000,
+    "type": "approval.granted",
+    "payload": {
+      "candidateId": "c4",
+      "by": "Commodity Manager (on stage)"
+    }
+  },
+  {
+    "id": "e038",
+    "ts": 72000,
+    "type": "candidate.status",
+    "payload": {
+      "id": "c4",
+      "status": "approved",
+      "reason": "QVL rev 11 qualified alternate · in stock · holds ship date",
+      "plain": "Approved. Tested on our server, in stock, and it arrives in time."
+    }
+  },
+  {
+    "id": "e039",
+    "ts": 74500,
+    "type": "po.drafted",
+    "payload": {
+      "poNumber": "PO-2026-10-4471",
+      "candidateId": "c4",
+      "qty": 11520,
+      "total": 3824640
+    }
+  },
+  {
+    "id": "e040",
+    "ts": 77000,
+    "type": "tool.call",
+    "payload": {
+      "callId": "t5",
+      "agent": "engineering",
+      "tool": "entire",
+      "label": "Committing QVL amendment + sourcing rationale",
+      "status": "running"
+    }
+  },
+  {
+    "id": "e041",
+    "ts": 80000,
+    "type": "tool.result",
+    "payload": {
+      "callId": "t5",
+      "kind": "entire.commit",
+      "payload": {
+        "commitHash": "7f3c1a9",
+        "blameUrl": "https://entire.dev/linedown/qvl/blame/7f3c1a9",
+        "summary": "qvl(AI-SRV-G4): promote MTC40F2046S1RC48BA1 to primary; block HMCG94AGBRA123N (unvalidated RCD); flag broker lot KR4821-B07 as remarked",
+        "sessionId": "sess_ld_0a71c4"
+      }
+    }
+  },
+  {
+    "id": "e042",
+    "ts": 82000,
+    "type": "policy.committed",
+    "payload": {
+      "commitHash": "7f3c1a9",
+      "blameUrl": "https://entire.dev/linedown/qvl/blame/7f3c1a9",
+      "summary": "qvl(AI-SRV-G4): promote MTC40F2046S1RC48BA1 to primary; block HMCG94AGBRA123N (unvalidated RCD); flag broker lot KR4821-B07 as remarked",
+      "sessionId": "sess_ld_0a71c4"
+    }
+  },
+  {
+    "id": "e043",
+    "ts": 84500,
+    "type": "agent.message",
+    "payload": {
+      "agent": "engineering",
+      "role": "Engineering",
+      "text": "QVL change is committed with the full decision trail. `entire blame qvl/AI-SRV-G4` returns who changed what, when, and why — including the block and the counterfeit flag. That is the IATF 16949 traceability answer.",
+      "plain": "The decision is now permanently recorded. If an auditor asks in two years why we changed memory suppliers, the answer is one command away."
+    }
+  },
+  {
+    "id": "e044",
+    "ts": 87000,
+    "type": "run.ended",
+    "payload": {
+      "outcomeLabel": "Line stays up — qualified alternate on PO, ship date held with 3 days float",
+      "dollarsSaved": 2465280,
+      "minutesElapsed": 3
+    }
+  }
+]

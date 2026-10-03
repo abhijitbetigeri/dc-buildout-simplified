@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "IBM Plex Sans", Inter, system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    @apply bg-base text-ink antialiased;
+    font-family: var(--font-sans);
+    /* Faint technical grid. Reads as instrumentation, not decoration. */
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.016) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.016) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  ::selection {
+    background: rgba(240, 161, 75, 0.25);
+  }
+}
+
+@layer utilities {
+  .mono {
+    font-family: var(--font-mono);
+    font-variant-ligatures: none;
+  }
+  /* Tabular + fixed width so a ticking counter never shifts the layout. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+  .label {
+    @apply mono text-[0.6875rem] uppercase tracking-[0.18em] text-faint;
+  }
+  .hairline {
+    @apply border-line;
+  }
+  .plain {
+    @apply text-[0.9375rem] leading-relaxed text-dim;
+  }
+  .scroll-dark {
+    scrollbar-width: thin;
+    scrollbar-color: #2b3236 transparent;
+  }
+  .scroll-dark::-webkit-scrollbar {
+    width: 10px;
+  }
+  .scroll-dark::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scroll-dark::-webkit-scrollbar-thumb {
+    background: #2b3236;
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  .scroll-dark::-webkit-scrollbar-thumb:hover {
+    background: #3a4348;
+    background-clip: content-box;
+  }
+  /* Bottom fade so the feed looks like it continues rather than being clipped. */
+  .fade-top {
+    mask-image: linear-gradient(to bottom, transparent 0, #000 28px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 28px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

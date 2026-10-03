@@ -1,15 +1,24 @@
 {
-  "name": "agents",
+  "name": "linedown-agents",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tsx tools/qvl.test.ts",
+    "capture": "tsx run.ts --capture",
+    "run": "tsx run.ts",
+    "offline": "tsx run.ts --offline"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "LINEDOWN AGENTS track — ZooWork agent definitions, orchestrator, tool adapters",
   "dependencies": {
     "@zoowork-ai/sdk": "^0.10.2"
-  }
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "private": true,
+  "type": "module"
 }

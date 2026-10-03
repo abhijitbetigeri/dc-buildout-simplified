@@ -19,6 +19,24 @@ type Event = {
 A run is `Event[]` ordered by `ts`. Replay = walk the list, sleep to the next `ts`, render.
 Live = same list, streamed. **The UI must not care which it is.**
 
+### File format (amended 15:00 — the one change to this frozen file)
+
+On disk a run is a **wrapper object**, not a bare array:
+
+```json
+{ "runId": "...", "program": "...", "durationMs": 148000, "events": [ /* Event[] */ ] }
+```
+
+Both DATA and AGENTS emit this shape, so live and replay files are interchangeable.
+**Every reader must accept both:**
+
+```ts
+const events = Array.isArray(d) ? d : d.events
+```
+
+The metadata is worth keeping — `durationMs` lets the UI size a progress bar before parsing
+55 events. Readers tolerate the bare array so nobody's stub breaks.
+
 ## Types
 
 ### `alert.raised` — opens the run
@@ -44,7 +62,7 @@ Live = same list, streamed. **The UI must not care which it is.**
 ```ts
 { callId: string
   agent: string
-  tool: "tavily" | "moss" | "entire" | "zoodata"
+  tool: "tavily" | "moss" | "entire" | "zoodata" | "qvl"   // "qvl" = local lookup, amended 15:15
   label: string    // "Pulling spot pricing" — human readable
   status: "running" }
 ```
@@ -57,6 +75,8 @@ Live = same list, streamed. **The UI must not care which it is.**
 }
 ```
 
+- `qvl.lookup` → `{ ... }` — the QVL lookup behind the block (added 15:00; readers tolerate the
+  earlier spelling `zoodata.qvl`). Everything this carries is also in `block.raised`.
 - `tavily.sources` → `{ sources: { title, url, snippet }[] }`
 - `moss.matches` → `{ matches: { id, label, score, thumbnail }[], latencyMs: number }`
 - `moss.partmatch` → `{ query: string, equivalents: { mpn, vendor, score, specs }[] , latencyMs: number }`

@@ -1,0 +1,335 @@
+{
+  "_comment": [
+    "LINEDOWN — platform Qualified Vendor List (QVL) for AI-SRV-G4, memory subsystem only.",
+    "PURPOSE: this file makes the beat-4 Engineering BLOCK a real lookup, not a hardcoded string.",
+    "A QVL records what was TESTED on this platform. It is not a compatibility list. A module can",
+    "match every electrical requirement in `requirements` and still be correctly blocked, because",
+    "nobody has ever run 24 of them in this board at full thermal load. That is the whole point of",
+    "beat 4 and it is the truthful engineering position.",
+    "KEY SHAPE: `platform`, `platformLabel`, `qualified[]`, `approvedAlternates[]`, `requirements{}`",
+    "are the contract agreed with the AGENTS track (qualification engine parses these). Everything",
+    "else is additive context and safe to ignore.",
+    "LOOKUP SEMANTICS: exact MPN present in `qualified` or `approvedAlternates` with status",
+    "'qualified' => PASS. Not present in either => BLOCK, even if specs match `requirements`",
+    "exactly. Check `evaluationQueue[]` on a miss for the richer reason (submitted but untested).",
+    "Entries with status 'withdrawn' are NOT a pass. 'qualified-conditional' requires every item in",
+    "its `conditions` to hold.",
+    "MODULE vs DIE — read before writing any reason string: every entry describes a complete 288-pin",
+    "RDIMM ASSEMBLY. `dieRevision` is a descriptor of the as-validated module build (it records",
+    "which build was on the bench), NOT a substitutable attribute. Sourcing an alternate here means",
+    "buying a different complete module from a different module manufacturer. It NEVER means",
+    "substituting DRAM die inside a module. Do not generate text that implies otherwise.",
+    "AUTHENTICITY IS A SEPARATE CHECK: a qualified MPN offered by a non-franchised broker still",
+    "passes this QVL. QVL answers 'was this part tested here'. It does not answer 'is this physical",
+    "module genuine'. That is the marking/counterfeit check in data/markings/. Beats 4 and 5 are two",
+    "orthogonal findings on purpose.",
+    "Validation report IDs, BIOS versions, dates and EVAL IDs are illustrative."
+  ],
+  "platform": "AI-SRV-G4",
+  "platformLabel": "AI-SRV-G4 — 480 node cluster",
+  "qvlRevision": "QVL-G4-2026.08-rev-D",
+  "effectiveDate": "2026-08-14",
+  "owner": "Platform Engineering — Memory Validation",
+  "documentClass": "controlled — IATF 16949 / ISO 9001 traceable artifact",
+  "platformDetail": {
+    "boardPartNumber": "ASRV-G4-MB-C2",
+    "cpuFamily": "AMD EPYC 9004/9005 (SP5), dual socket",
+    "memoryChannelsPerSocket": 12,
+    "dimmsPerChannel": 1,
+    "slotsPerNode": 24,
+    "moduleType": "DDR5 RDIMM, 288-pin",
+    "ratedSpeedMTps": 4800,
+    "populationRule": "1DPC, all 24 slots populated, single MPN per node — no mixed-vendor population within a node",
+    "biosVersion": "G4-BIOS-1.3.2",
+    "memoryReferenceCode": "AGESA 1.0.0.9b",
+    "maxModuleHeightMm": 31.25,
+    "airflowEnvelope": "35C inlet nominal / 45C short-term excursion, 70C module case worst case hot-aisle"
+  },
+  "requirements": {
+    "capacityGB": 64,
+    "speedMTps": 4800,
+    "ranks": "2Rx4",
+    "formFactor": "RDIMM",
+    "voltage": "1.1V"
+  },
+  "requirementsDetail": {
+    "eccType": "on-die+side-band",
+    "heightMm": 31.25,
+    "pins": 288,
+    "spdRevision": "SPD5 hub required",
+    "pmic": "on-module PMIC required",
+    "note": "These are the five fields the qualification engine compares field-by-field on an MPN miss, plus the detail fields recorded for the audit trail."
+  },
+  "policy": {
+    "blockOnNotListed": true,
+    "blockOnWithdrawn": true,
+    "allowSpecCompatibleSubstitution": false,
+    "allowMixedVendorWithinNode": false,
+    "requireFranchisedSource": true,
+    "requireCertificateOfConformance": true,
+    "rationale": "Spec compatibility is not qualification. A module may satisfy every entry in `requirements` and still be blocked: qualification is evidence that THIS module build was run in THIS board at full 24-slot loading across the thermal envelope. Absent a validation report, the platform owner cannot stand behind the configuration.",
+    "plain": "Only memory that has actually been tested in this exact server is allowed. Matching the spec sheet is not enough.",
+    "escalationPath": "Platform Engineering memory owner may grant a deviation only with a completed margin report plus a signed customer-notified deviation record. No deviation was granted in this run."
+  },
+  "qualified": [
+    {
+      "mpn": "MTC20F2085S1RC48BA1",
+      "vendor": "Micron",
+      "vendorJedecId": "0x2C (JEP106 bank 1)",
+      "dieRevision": "B",
+      "specs": {
+        "capacityGB": 64,
+        "speedMTps": 4800,
+        "ranks": "2Rx4",
+        "formFactor": "RDIMM",
+        "voltage": "1.1V",
+        "eccType": "on-die+side-band"
+      },
+      "qualifiedOn": "2026-03-02",
+      "qvlRevision": "G4-QVL-r7",
+      "role": "incumbent primary",
+      "validationReportId": "MV-G4-0244",
+      "minBiosVersion": "G4-BIOS-1.3.2",
+      "heightMm": 31.25,
+      "modulePcbRevision": "E2",
+      "status": "qualified",
+      "notes": "Incumbent. Allocation cut 40% on 2026-10-03 — this is the shortage that opened the run. Part remains qualified; supply, not qualification, is the problem."
+    },
+    {
+      "mpn": "MTC40F2046S1RC48BA1",
+      "vendor": "Micron",
+      "vendorJedecId": "0x2C (JEP106 bank 1)",
+      "dieRevision": "B",
+      "specs": {
+        "capacityGB": 32,
+        "speedMTps": 4800,
+        "ranks": "2Rx8",
+        "formFactor": "RDIMM",
+        "voltage": "1.1V",
+        "eccType": "on-die+side-band"
+      },
+      "qualifiedOn": "2026-03-02",
+      "qvlRevision": "G4-QVL-r7",
+      "role": "alternate capacity SKU",
+      "validationReportId": "MV-G4-0245",
+      "minBiosVersion": "G4-BIOS-1.3.2",
+      "heightMm": 31.25,
+      "status": "qualified",
+      "notes": "32GB SKU. Qualified for the G4 board but NOT a substitute on this program — AI-SRV-G4 is specified at 1.5TB per node and there is no second DIMM per channel to make up the capacity."
+    }
+  ],
+  "approvedAlternates": [
+    {
+      "mpn": "M321R8GA0BB0-CQK",
+      "vendor": "Samsung",
+      "vendorJedecId": "0xCE (JEP106 bank 1)",
+      "dieRevision": "B",
+      "specs": {
+        "capacityGB": 64,
+        "speedMTps": 4800,
+        "ranks": "2Rx4",
+        "formFactor": "RDIMM",
+        "voltage": "1.1V",
+        "eccType": "on-die+side-band"
+      },
+      "qualifiedOn": "2026-05-29",
+      "qvlRevision": "G4-QVL-r7",
+      "role": "qualified alternate — promoted to primary alternate by commit 7f3c1ab (rev-E)",
+      "validationReportId": "MV-G4-0288",
+      "minBiosVersion": "G4-BIOS-1.3.2",
+      "heightMm": 31.25,
+      "modulePcbRevision": "A1",
+      "status": "qualified",
+      "testCoverage": [
+        "24-slot 1DPC population, both sockets",
+        "memtest + stressapptest 96h at 45C inlet",
+        "margin shmoo: VDDQ / tRCD / RTT at 4800 MT/s",
+        "thermal soak to 70C module case, no throttle, no CE escalation",
+        "SPD5 hub and PMIC telemetry readback via BMC"
+      ],
+      "notes": "THE APPROVED WINNER of this run. Mechanically and electrically a drop-in module replacement for the Micron incumbent: same 288-pin RDIMM, 31.25mm, 2Rx4, same 1DPC population rules, no board change, no BIOS change, no die substitution."
+    },
+    {
+      "mpn": "HMCG94MEBRA109N",
+      "vendor": "SK hynix",
+      "vendorJedecId": "0xAD (JEP106 bank 1)",
+      "dieRevision": "M",
+      "specs": {
+        "capacityGB": 64,
+        "speedMTps": 4800,
+        "ranks": "2Rx4",
+        "formFactor": "RDIMM",
+        "voltage": "1.1V",
+        "eccType": "on-die+side-band"
+      },
+      "qualifiedOn": "2026-06-11",
+      "qvlRevision": "G4-QVL-r7",
+      "role": "qualified alternate",
+      "validationReportId": "MV-G4-0291",
+      "minBiosVersion": "G4-BIOS-1.3.2",
+      "heightMm": 31.25,
+      "status": "qualified",
+      "notes": "Fully qualified. Rejected in this run on SCHEDULE ONLY — 14-week factory lead time against an 11-day kit date, no franchised or bonded stock located. Nothing wrong with the part. Keep this distinction in any narration: a schedule reject is not a quality reject."
+    },
+    {
+      "mpn": "KSM48R40BD4TMM-64HMR",
+      "vendor": "Kingston",
+      "vendorJedecId": "0x0198 (JEP106 bank 2)",
+      "dieRevision": "B",
+      "specs": {
+        "capacityGB": 64,
+        "speedMTps": 4800,
+        "ranks": "2Rx4",
+        "formFactor": "RDIMM",
+        "voltage": "1.1V",
+        "eccType": "on-die+side-band"
+      },
+      "qualifiedOn": "2026-06-26",
+      "qvlRevision": "G4-QVL-r7",
+      "role": "qualified alternate — second source",
+      "validationReportId": "MV-G4-0296",
+      "minBiosVersion": "G4-BIOS-1.3.2",
+      "heightMm": 31.25,
+      "status": "qualified",
+      "notes": "Module-house alternate, qualified. Not quoted in this run — no stock at the franchised distributor on the 11-day window. Present in the file so the lookup has depth and so the demo can survive a question about third sources."
+    },
+    {
+      "mpn": "MTC40F204WS1RC56BB1",
+      "vendor": "Micron",
+      "vendorJedecId": "0x2C (JEP106 bank 1)",
+      "dieRevision": "C",
+      "specs": {
+        "capacityGB": 96,
+        "speedMTps": 5600,
+        "ranks": "2Rx4",
+        "formFactor": "RDIMM",
+        "voltage": "1.1V",
+        "eccType": "on-die+side-band"
+      },
+      "qualifiedOn": "2026-07-17",
+      "qvlRevision": "G4-QVL-r7",
+      "role": "conditional alternate — capacity uplift SKU",
+      "validationReportId": "MV-G4-0303",
+      "minBiosVersion": "G4-BIOS-1.4.0",
+      "heightMm": 31.25,
+      "status": "qualified-conditional",
+      "conditions": [
+        "requires BIOS G4-BIOS-1.4.0 or later — program is shipping 1.3.2",
+        "down-bins to 4800 MT/s on this platform; the 5600 rating is not realised",
+        "changes node capacity to 2.3TB — requires a customer-approved configuration change",
+        "whole-node population only, no partial mix with 64GB modules"
+      ],
+      "notes": "Not viable in this run: the program is frozen on BIOS 1.3.2 and the capacity change needs customer sign-off. Included because 'why not just use the bigger one' is the obvious audience question and the file should answer it."
+    },
+    {
+      "mpn": "HMCG94AGBRA109N",
+      "vendor": "SK hynix",
+      "vendorJedecId": "0xAD (JEP106 bank 1)",
+      "dieRevision": "A",
+      "specs": {
+        "capacityGB": 64,
+        "speedMTps": 4800,
+        "ranks": "2Rx4",
+        "formFactor": "RDIMM",
+        "voltage": "1.1V",
+        "eccType": "on-die+side-band"
+      },
+      "qualifiedOn": "2025-11-20",
+      "qvlRevision": "G4-QVL-r5",
+      "role": "superseded",
+      "validationReportId": "MV-G4-0198",
+      "status": "withdrawn",
+      "withdrawnOn": "2026-06-11",
+      "withdrawnReason": "SPD5 hub thermal-sensor readback erratum under 24-slot loading; superseded by HMCG94MEBRA109N (report MV-G4-0291). Specs match `requirements` exactly and this entry MUST still fail the lookup.",
+      "notes": "Deliberate trap for the qualification engine: an exact MPN hit that is NOT a pass. Verify the engine checks `status`, not just presence."
+    }
+  ],
+  "evaluationQueue": [
+    {
+      "mpn": "TRA564G48D436O",
+      "vendor": "V-color Technology",
+      "evaluationQueueId": "EVAL-G4-0412",
+      "submittedOn": "2026-07-02",
+      "submittedSamples": 8,
+      "specs": {
+        "capacityGB": 64,
+        "speedMTps": 4800,
+        "ranks": "2Rx4",
+        "formFactor": "RDIMM",
+        "voltage": "1.1V",
+        "eccType": "on-die+side-band"
+      },
+      "specCompareToRequirements": "MATCH on all five fields (capacityGB, speedMTps, ranks, formFactor, voltage)",
+      "status": "incomplete",
+      "testsPassed": [
+        "SPD5 content and JEDEC conformance",
+        "single-module POST and boot on ASRV-G4-MB-C2",
+        "4-slot partial-population memtest, 24h at 25C inlet"
+      ],
+      "testsOutstanding": [
+        "24-slot 1DPC full-population loading — never run",
+        "thermal soak to 70C module case — never run",
+        "margin shmoo at 4800 MT/s (VDDQ / tRCD / RTT) — never run",
+        "96h stressapptest at 45C inlet — never run",
+        "BMC PMIC/hub telemetry readback — never run"
+      ],
+      "validationReportId": null,
+      "blockingReason": "No RDIMM validation report issued. Thermal margin and 24-slot loading tests never completed — samples returned to the vendor 2026-08-09 when the chamber slot was reassigned to the 96GB SKU.",
+      "plain": "This supplier sent samples in July. Testing was started and never finished, so there is no report. On paper the part is an exact match for what the server needs — but nobody has ever run 24 of them in one machine at full load.",
+      "notes": "THE BEAT-4 BLOCK TARGET. Absent from `qualified` and `approvedAlternates` by design, and spec-compatible on every field by design, so the block cannot be dismissed as 'wrong part'. It is the strongest form of the beat: electrically fine, commercially cheapest, still blocked, because QVL records what was tested and not what fits.",
+      "pathToQualification": "Supply 40 modules plus a thermal chamber slot; ~6 weeks to a signed report. Re-quote next program phase."
+    },
+    {
+      "mpn": "78.D2GPF.AF20B",
+      "vendor": "Apacer",
+      "evaluationQueueId": "EVAL-G4-0388",
+      "submittedOn": "2026-05-15",
+      "specs": {
+        "capacityGB": 64,
+        "speedMTps": 4800,
+        "ranks": "2Rx4",
+        "formFactor": "RDIMM",
+        "voltage": "1.1V",
+        "eccType": "on-die+side-band"
+      },
+      "status": "incomplete",
+      "validationReportId": null,
+      "blockingReason": "Vendor withdrew samples before thermal soak. No report.",
+      "plain": "Another supplier that started the approval process and did not finish it.",
+      "notes": "Depth only. Not quoted in this run. Illustrative MPN."
+    }
+  ],
+  "supplierPolicy": {
+    "franchisedOnly": true,
+    "approvedChannels": [
+      "manufacturer direct",
+      "franchised/authorised distributor with certificate of conformance and manufacturer traceability"
+    ],
+    "blacklist": [
+      {
+        "supplier": "Pacific Rim Components Ltd. (HK)",
+        "lot": "PRC-24817",
+        "addedOn": "2026-10-03",
+        "reason": "Remarked modules offered as MTC20F2085S1RC48BA1. Six independent top-marking failures confirmed; see data/markings/. Filed to ERAI.",
+        "plain": "Banned supplier. They sold us relabelled memory pretending to be a part we use.",
+        "note": "IMPORTANT: the MPN they offered IS on this QVL. The QVL lookup passes. Authenticity is a separate check and that is why this is a second, independent beat."
+      }
+    ]
+  },
+  "changeLog": [
+    {
+      "revision": "QVL-G4-2026.08-rev-D",
+      "date": "2026-08-14",
+      "summary": "Baseline for this run. Micron incumbent + Samsung / SK hynix / Kingston alternates; HMCG94AGBRA109N withdrawn; 96GB SKU qualified-conditional."
+    },
+    {
+      "revision": "QVL-G4-2026.08-rev-E",
+      "date": "2026-10-03",
+      "commitHash": "7f3c1ab",
+      "blameUrl": "https://entire.dev/linedown/ai-srv-g4/qvl/blame/7f3c1ab#L41",
+      "sessionId": "ld-sess-20261003-1402",
+      "summary": "Promote M321R8GA0BB0-CQK to qualified primary alternate (MV-G4-0288). Record Engineering block of TRA564G48D436O (EVAL-G4-0412 incomplete). Record schedule rejection of HMCG94MEBRA109N (14-week lead). Blacklist broker lot PRC-24817. Attach PO-4471982.",
+      "note": "This is the rev the Entire commit in beat 7 creates. It is listed here so the demo can show the before/after without a second file."
+    }
+  ]
+}

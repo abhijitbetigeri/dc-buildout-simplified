@@ -1,0 +1,109 @@
+{
+  "_comment": [
+    "LINEDOWN — known-remarked PATTERN reference, 'cluster A'. Beat 5.",
+    "WHY THIS FILE EXISTS: data/mock-events.json e036 reports a 0.93 similarity score for the",
+    "broker's lot. Without this file that 0.93 has no referent, and the obvious judge question —",
+    "'0.93 similar to WHAT?' — has no answer. This is the what.",
+    "WHAT IT IS: an abstract SIGNATURE of remarked DDR5 RDIMMs, not a specific part, lot or seizure.",
+    "It holds the six discriminator patterns that recur across remarking jobs regardless of which",
+    "part is being faked, so a new suspect lot can be scored against the pattern rather than",
+    "needing a genuine reference for every MPN in the BOM. That is the generalisation that makes",
+    "the check useful on a 20-line BOM instead of only on parts we happen to have samples of.",
+    "ILLUSTRATIVE AND FICTIONAL: 'cluster A' is an invented construct, modelled on the SHAPE of",
+    "industry counterfeit advisories (ERAI and similar). The weights are hand-set for the demo and",
+    "are NOT derived from a real dataset. Do not present this as real anti-counterfeit reference",
+    "data or imply it came from an industry body.",
+    "MODULE vs DIE: every pattern below is observable on the OUTSIDE of an assembled module — label,",
+    "package top marking, SPD contents. Nothing here involves decapsulation or die analysis. The",
+    "claim this supports is narrow and defensible: the module is not the part it says it is, so our",
+    "qualification data does not apply to it. It is NOT a claim about what die is inside."
+  ],
+  "fixtureId": "ref-remarked-cluster-A",
+  "class": "pattern",
+  "patternName": "Remarked pattern — reference cluster A",
+  "appliesTo": "DDR5 RDIMM modules, any capacity or vendor",
+  "detectionMode": "text-first — all six patterns are string, regex, range or date comparisons. Image similarity is an optional enhancement, never the mechanism.",
+  "patterns": [
+    {
+      "id": "P1",
+      "name": "surface abrasion with ink overprint",
+      "observable": "markingMethod != 'laser-etched'; sanding swirl, matte patch under marking, gloss mismatch at package edges",
+      "weight": 0.22,
+      "individuallySufficient": true,
+      "plain": "The original markings were sanded off and new ones printed on top."
+    },
+    {
+      "id": "P2",
+      "name": "wrong glyph profile",
+      "observable": "glyphProfile not in genuine allowed set; characterPitchMm deviating >8% from the manufacturer's laser glyph set",
+      "weight": 0.12,
+      "individuallySufficient": false,
+      "plain": "The lettering is the wrong font and the wrong size."
+    },
+    {
+      "id": "P3",
+      "name": "absent or unreadable 2D code",
+      "observable": "DataMatrix present == false, or decodes to nothing",
+      "weight": 0.18,
+      "individuallySufficient": true,
+      "plain": "The square tracking code is missing, so nothing can be looked up."
+    },
+    {
+      "id": "P4",
+      "name": "blank, zeroed or repeated serial",
+      "observable": "moduleSerialNumber fails serialRegex, falls outside issuedSerialRanges, or repeats across sampled units",
+      "weight": 0.18,
+      "individuallySufficient": true,
+      "plain": "No traceable serial number, or the same serial on every stick in the box."
+    },
+    {
+      "id": "P5",
+      "name": "SPD vendor ID present, assembler bytes blank",
+      "observable": "moduleManufacturerJep106 populated but moduleManufacturingLocation / Date / SerialNumber all zero",
+      "weight": 0.18,
+      "individuallySufficient": true,
+      "plain": "The internal data chip names a manufacturer but has no record of where or when the stick was built. Those details are written at the real factory.",
+      "note": "The highest-signal pattern in the set and the hardest to fake, because those bytes are programmed during module assembly — a step a re-labeller does not perform."
+    },
+    {
+      "id": "P6",
+      "name": "date-code incoherence",
+      "observable": "date code failing YYWW regex (week 00 or 54+), or earlier than the first build date of the module PCB revision it is mounted on",
+      "weight": 0.12,
+      "individuallySufficient": true,
+      "plain": "The dates do not add up — chips older than the board they are soldered to, or a week number that cannot exist."
+    }
+  ],
+  "scoring": {
+    "method": "weighted sum of matched patterns, weights summing to 1.00",
+    "flagThreshold": 0.6,
+    "rejectThreshold": 0.8,
+    "note": "Four of the six patterns are individually sufficient to reject a lot. The weighted score exists to rank and triage many lots, not to soften a single hard failure. A lot that trips one individuallySufficient pattern is rejected regardless of score."
+  },
+  "scoredAgainst": [
+    {
+      "fixtureId": "suspect-broker-lot-PRC-24817",
+      "patternsMatched": ["P1", "P2", "P3", "P4", "P5", "P6"],
+      "score": 0.93,
+      "verdict": "REJECT",
+      "note": "All six patterns matched; score is 0.93 rather than 1.00 because P2's pitch deviation is measured at 14% and scores partial."
+    },
+    {
+      "fixtureId": "genuine-micron-MTC20F2085S1RC48BA1",
+      "patternsMatched": [],
+      "score": 0.0,
+      "verdict": "PASS",
+      "note": "Inverse of the 0.41 figure reported in e036. That 0.41 is the suspect lot's visual similarity to the GENUINE Micron reference — a different comparison, and low precisely because the suspect module's markings do not match the part it claims to be."
+    },
+    {
+      "fixtureId": "genuine-samsung-M321R8GA0BB0-CQK",
+      "patternsMatched": [],
+      "score": 0.0,
+      "verdict": "PASS",
+      "note": "The approved winner. Clean against every pattern."
+    }
+  ],
+  "discriminationNote": "The three scores reported in e036 (0.93 / 0.41 / 0.18) matter together, not separately: a matcher that flagged everything would be useless. High against the remarked pattern, low against the part it claims to be, lower still against an unrelated genuine part, is the signature of a check that actually discriminates.",
+  "images": { "label": "data/markings/img/reference-remarked-cluster-A.svg" },
+  "plain": "A checklist of the six things relabelled memory almost always gets wrong. Any one of four of them is enough to refuse a whole shipment on its own. The broker's sticks matched all six."
+}

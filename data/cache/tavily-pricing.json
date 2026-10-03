@@ -1,0 +1,21 @@
+{
+  "sources": [
+    {
+      "title": "DDR5 RDIMM server module contract pricing — quarterly trend",
+      "url": "https://www.trendforce.com/",
+      "snippet": "Server DRAM contract prices continued to climb quarter over quarter as suppliers reallocated wafer capacity toward HBM. 64GB DDR5-4800 RDIMM modules saw the steepest move in the conventional server segment, with spot quotes running well above contract."
+    },
+    {
+      "title": "Spot market quotes, 64GB DDR5-4800 RDIMM",
+      "url": "https://www.dramexchange.com/",
+      "snippet": "Spot offers for 64GB DDR5-4800 registered modules widened against contract pricing, with broker inventory commanding a premium. Buyers report quote validity windows shortening to days."
+    },
+    {
+      "title": "Memory market outlook — conventional DRAM under HBM squeeze",
+      "url": "https://www.counterpointresearch.com/",
+      "snippet": "Every wafer moved to HBM removes several times its area of conventional DDR5 supply. Analysts expect server DDR5 tightness to persist while HBM qualification ramps absorb leading-edge capacity."
+    }
+  ],
+  "_fixture": true,
+  "_query": "DDR5 RDIMM 64GB 4800 spot price per module server memory contract price trend"
+}

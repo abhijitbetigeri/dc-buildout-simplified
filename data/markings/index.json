@@ -1,0 +1,118 @@
+{
+  "_comment": [
+    "LINEDOWN — manifest for the beat-5 marking fixture set. Load this instead of globbing.",
+    "Each entry points at a .json (structured), a .txt sidecar (flat, generated from the .json),",
+    "and an .svg label image where one exists.",
+    "TEXT-FIRST BY DESIGN: `data/markings/marking-strings.txt` carries every discriminator in the",
+    "whole set as flat tagged lines. If Moss image embedding is unavailable (MILESTONES.md risk",
+    "register, row M1), beat 5 runs unchanged off that file using string, regex, range and date",
+    "comparisons. The images are the nicer visual, never the mechanism.",
+    "GENERATED FILES: every .txt is generated from its sibling .json. Edit the .json. The two",
+    "generator scripts used are throwaway and live outside the repo; regeneration is a 20-line",
+    "script and the .txt files are committed, so nothing depends on them existing.",
+    "ILLUSTRATIVE: all marking strings, lot codes, serial ranges, glyph-profile names and pattern",
+    "weights are fabricated for the demo. 'Pacific Rim Components Ltd.' and lot PRC-24817 are",
+    "invented. 'Reference cluster A' is an invented construct modelled on the shape of industry",
+    "counterfeit advisories. None of this is real anti-counterfeit reference data.",
+    "MODULE vs DIE: the entire set is module-level — adhesive labels and DRAM package top markings",
+    "on assembled 288-pin RDIMMs, plus SPD contents read over I2C. Nothing was decapsulated and no",
+    "claim is made about which DRAM die is inside any module. The defensible claim is narrower and",
+    "stronger: the module is not the part it says it is, so none of our qualification data applies."
+  ],
+  "beat": 5,
+  "beatLabel": "Broker offer → photograph DIMM → Moss matches counterfeit marking",
+  "eventRefs": {
+    "toolCall": "e035 — moss, 'Matching module top-marking, FBGA code and lot/date code against reference lots'",
+    "toolResult": "e036 — moss.matches, latencyMs 0.2, three scored references",
+    "counterfeitFlagged": "e037 — counterfeit.flagged, score 0.93, imageA vs imageB side by side",
+    "candidateStatus": "e038 — cand-02 rejected",
+    "eventLog": "data/mock-events.json"
+  },
+  "fixtures": [
+    {
+      "fixtureId": "suspect-broker-lot-PRC-24817",
+      "class": "suspect-counterfeit",
+      "role": "THE SUSPECT — imageA in e037",
+      "candidateId": "cand-02",
+      "claimedMpn": "MTC20F2085S1RC48BA1",
+      "lotCode": "PRC-24817",
+      "json": "data/markings/suspect-broker-lot-PRC-24817.json",
+      "txt": "data/markings/suspect-broker-lot-PRC-24817.txt",
+      "svg": "data/markings/img/suspect-broker-PRC-24817-label.svg",
+      "findingsFailed": 6,
+      "verdict": "COUNTERFEIT — REMARKED MODULE"
+    },
+    {
+      "fixtureId": "genuine-micron-MTC20F2085S1RC48BA1",
+      "class": "genuine-reference",
+      "role": "THE BASELINE — imageB in e037. The part the suspect lot claims to be.",
+      "mpn": "MTC20F2085S1RC48BA1",
+      "json": "data/markings/genuine-micron-MTC20F2085S1RC48BA1.json",
+      "txt": "data/markings/genuine-micron-MTC20F2085S1RC48BA1.txt",
+      "svg": "data/markings/img/genuine-micron-MTC20F2085S1RC48BA1-label.svg"
+    },
+    {
+      "fixtureId": "ref-remarked-cluster-A",
+      "class": "pattern",
+      "role": "The pattern the 0.93 score is measured against. Answers 'similar to what?'.",
+      "json": "data/markings/reference-remarked-cluster-A.json",
+      "txt": "data/markings/reference-remarked-cluster-A.txt",
+      "svg": "data/markings/img/reference-remarked-cluster-A.svg"
+    },
+    {
+      "fixtureId": "genuine-samsung-M321R8GA0BB0-CQK",
+      "class": "genuine-reference",
+      "role": "The approved winner, and the low-similarity control (0.18) that proves the matcher discriminates.",
+      "mpn": "M321R8GA0BB0-CQK",
+      "candidateId": "cand-03",
+      "json": "data/markings/genuine-samsung-M321R8GA0BB0-CQK.json",
+      "txt": "data/markings/genuine-samsung-M321R8GA0BB0-CQK.txt",
+      "svg": "data/markings/img/genuine-samsung-M321R8GA0BB0-CQK-label.svg"
+    },
+    {
+      "fixtureId": "genuine-skhynix-HMCG94MEBRA109N",
+      "class": "genuine-reference",
+      "role": "Completeness. The schedule-rejected candidate's clean record — rejected on lead time, not quality.",
+      "mpn": "HMCG94MEBRA109N",
+      "candidateId": "cand-04",
+      "json": "data/markings/genuine-skhynix-HMCG94MEBRA109N.json",
+      "txt": "data/markings/genuine-skhynix-HMCG94MEBRA109N.txt",
+      "svg": null
+    }
+  ],
+  "flatTextFallback": {
+    "path": "data/markings/marking-strings.txt",
+    "format": "<CLASS>|<fixtureId>|<TAG>|<value>, one per line",
+    "rows": 194,
+    "usefulGreps": {
+      "the six failures with their methods": "grep '|FINDING|' data/markings/marking-strings.txt",
+      "judge-facing one-liners": "grep '_PLAIN|' data/markings/marking-strings.txt",
+      "the reusable pattern set": "grep '|PATTERN|' data/markings/marking-strings.txt",
+      "what a genuine part looks like": "grep '^GENUINE|' data/markings/marking-strings.txt",
+      "all three similarity scores": "grep '|SIMILARITY|' data/markings/marking-strings.txt"
+    }
+  },
+  "similarityMatrix": {
+    "_comment": "The three scores e036 reports. They matter together: high against the remarked pattern, low against the part it claims to be, lower still against an unrelated genuine part. A matcher that flagged everything would prove nothing.",
+    "query": "suspect-broker-lot-PRC-24817",
+    "scores": {
+      "ref-remarked-cluster-A": 0.93,
+      "genuine-micron-MTC20F2085S1RC48BA1": 0.41,
+      "genuine-samsung-M321R8GA0BB0-CQK": 0.18
+    },
+    "latencyMs": 0.2,
+    "latencyNote": "MOSS's MEASURED local-backend query time (status/moss.md), not an invented figure. Excludes parseMs — never add parseMs to latencyMs. Stage wording is 'on-device retrieval', NOT 'fully offline': index creation is a cloud operation and only the query is local. The honest version of the confidentiality point is that the QUERY never leaves the laptop."
+  },
+  "photoSwapProcedure": {
+    "_comment": "The user is photographing a real DIMM — one genuine, one with an altered label. These are an UPGRADE, not a dependency: the schematic SVGs are a legitimate shipping artifact and may project more legibly than a phone photo under venue lighting.",
+    "rule": "The event log (data/mock-events.json e036/e037) references these exact paths and MUST NOT be edited to accept a photo.",
+    "viewBox": "0 0 440 210 (~2.1:1) — fixed, so a 4:3 phone photo letterboxes predictably instead of reflowing the beat-5 layout",
+    "preferredMethod": "Overwrite the .svg in place with an <svg> wrapper containing an <image> element pointing at the photo, or replace the file with the photo and keep the filename. Zero code change.",
+    "alternateMethod": "Drop a same-stem .png beside the .svg and have the UI asset resolver prefer .png when present. One line in the UI, no data change.",
+    "paths": {
+      "genuine (imageB)": "data/markings/img/genuine-micron-MTC20F2085S1RC48BA1-label.svg",
+      "altered (imageA)": "data/markings/img/suspect-broker-PRC-24817-label.svg"
+    },
+    "deadline": "16:30 feature freeze. If the photos are not in by then, ship the SVGs — they are complete and correct as-is."
+  }
+}

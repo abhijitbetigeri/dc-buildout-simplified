@@ -1,0 +1,70 @@
+{
+  "_comment": [
+    "LINEDOWN — GENUINE reference marking fixture for the APPROVED WINNER (beat 6).",
+    "Present so the demo can show that the part we actually bought has a clean, complete marking",
+    "record — not just that the broker's lot was dirty. It is also the low-similarity control in",
+    "the beat-5 match (0.18 against the suspect lot), which demonstrates the matcher discriminates",
+    "rather than flagging everything.",
+    "ILLUSTRATIVE: marking strings, lot codes and serial ranges are plausible and format-correct",
+    "but fabricated. Not transcribed from real Samsung parts.",
+    "MODULE vs DIE: describes markings on a complete 288-pin RDIMM assembly. The component part",
+    "number under `dramPackageTopMarking` is recorded because it is what is physically printed on",
+    "the packages — NOT because anything here substitutes die."
+  ],
+  "fixtureId": "genuine-samsung-M321R8GA0BB0-CQK",
+  "class": "genuine-reference",
+  "mpn": "M321R8GA0BB0-CQK",
+  "manufacturer": "Samsung Semiconductor",
+  "partLabel": "64GB DDR5-4800 RDIMM, 2Rx4, 1.1V, 31.25mm, 288-pin",
+  "jep106": { "bank": 1, "id": "0xCE", "vendor": "Samsung" },
+  "candidateId": "cand-03",
+  "qvlRef": { "qvlRevision": "QVL-G4-2026.08-rev-D", "validationReportId": "MV-G4-0288" },
+  "moduleLabel": {
+    "substrate": "white polyimide adhesive label, heat-spreader mounted",
+    "lines": [
+      "SAMSUNG",
+      "M321R8GA0BB0-CQK",
+      "64GB 2Rx4 PC5-4800B-RR2-1010-XT",
+      "SN: C4F20A77",
+      "LOT: GTW2608B",
+      "DC: 2608",
+      "MADE IN KOREA"
+    ],
+    "barcodes": [
+      { "symbology": "Code 128", "encodes": "M321R8GA0BB0-CQK" },
+      { "symbology": "DataMatrix ECC200", "encodes": "1P M321R8GA0BB0-CQK S C4F20A77 1T GTW2608B" }
+    ]
+  },
+  "dramPackageTopMarking": {
+    "markingMethod": "laser-etched",
+    "surfaceFinish": "uniform moulded epoxy, no abrasion, consistent gloss",
+    "componentPartNumber": "K4RAH086VB-BCQK",
+    "lines": ["SAMSUNG 608", "K4RAH086VB-BCQK", "GTW2608B", "KOREA"],
+    "glyphProfile": "samsung-laser-v2",
+    "characterPitchMm": 0.95,
+    "logoPresent": true,
+    "packageCount": 36
+  },
+  "spd": {
+    "revision": "SPD5 hub (SPD5118)",
+    "moduleManufacturerJep106": "0xCE",
+    "dramManufacturerJep106": "0xCE",
+    "moduleManufacturingLocation": "0x01",
+    "moduleManufacturingDate": "2608",
+    "moduleSerialNumber": "C4F20A77",
+    "modulePartNumber": "M321R8GA0BB0-CQK"
+  },
+  "modulePcb": { "revision": "A1", "firstBuildDate": "2025-W31" },
+  "validators": {
+    "dateCodeRegex": "^(2[0-9])(0[1-9]|[1-4][0-9]|5[0-3])$",
+    "lotCodeRegex": "^[A-Z]{3}[0-9]{4}[A-Z]$",
+    "serialRegex": "^[0-9A-F]{8}$",
+    "issuedSerialRanges": [["C0000000", "CFFFFFFF"]],
+    "allowedComponentPartNumbers": ["K4RAH086VB-BCQK"],
+    "allowedAssemblySites": ["KOREA", "CHINA"],
+    "allowedMarkingMethods": ["laser-etched"],
+    "note": "Assembly site CHINA is legitimate for this manufacturer. Country of origin alone is never a counterfeit indicator — it is only evidence when it contradicts the manufacturer's published sites for the specific SKU, which is how it is used in finding F1/F3 of the suspect fixture, not as a standalone red flag."
+  },
+  "images": { "label": "data/markings/img/genuine-samsung-M321R8GA0BB0-CQK-label.svg" },
+  "plain": "The part we actually bought. Laser-burned codes, a traceable serial number, a working tracking code, and every date agreeing with every other date."
+}

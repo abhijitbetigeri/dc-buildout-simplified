@@ -1,0 +1,86 @@
+{
+  "_comment": [
+    "LINEDOWN — GENUINE reference marking fixture. Beat 5 (counterfeit catch).",
+    "This is the known-good baseline the broker's lot is compared against.",
+    "TEXT FIRST: every discriminator in this file is a string, a regex or a date, so the beat works",
+    "with pure text matching even if Moss image embedding is unavailable (see the M1 risk row in",
+    "MILESTONES.md). The SVG under `images` is a visual aid, not the mechanism.",
+    "ILLUSTRATIVE: marking strings, lot codes, serial ranges and glyph-profile names are",
+    "plausible and format-correct but fabricated for the demo. They are NOT transcribed from real",
+    "Micron parts and must not be presented as authoritative anti-counterfeit reference data.",
+    "MODULE vs DIE: this fixture describes markings on a complete 288-pin RDIMM ASSEMBLY — both the",
+    "module-level adhesive label and the top marking on the DRAM packages mounted to it. The",
+    "counterfeit at issue is a MODULE that was re-labelled. We are not inspecting or substituting",
+    "DRAM die."
+  ],
+  "fixtureId": "genuine-micron-MTC20F2085S1RC48BA1",
+  "class": "genuine-reference",
+  "mpn": "MTC20F2085S1RC48BA1",
+  "manufacturer": "Micron Technology",
+  "partLabel": "64GB DDR5-4800 RDIMM, 2Rx4, 1.1V, 31.25mm, 288-pin",
+  "jep106": { "bank": 1, "id": "0x2C", "vendor": "Micron Technology" },
+  "moduleLabel": {
+    "substrate": "white polyimide adhesive label, heat-spreader mounted",
+    "lines": [
+      "MICRON",
+      "MTC20F2085S1RC48BA1",
+      "64GB 2Rx4 PC5-4800B-RR1-1010-XT",
+      "SN: 7A3E91C4",
+      "LOT: JW2502A",
+      "DC: 2502",
+      "ASSEMBLED IN TAIWAN"
+    ],
+    "barcodes": [
+      { "symbology": "Code 128", "encodes": "MTC20F2085S1RC48BA1" },
+      { "symbology": "DataMatrix ECC200", "encodes": "1P MTC20F2085S1RC48BA1 S 7A3E91C4 1T JW2502A" }
+    ]
+  },
+  "dramPackageTopMarking": {
+    "markingMethod": "laser-etched",
+    "surfaceFinish": "uniform moulded epoxy, no abrasion, consistent gloss",
+    "fbgaCode": "D8BNJ",
+    "lines": ["MT", "D8BNJ", "JW 2502", "TAIWAN"],
+    "glyphProfile": "micron-laser-v3",
+    "characterPitchMm": 0.92,
+    "logoPresent": true,
+    "packageCount": 36,
+    "note": "The FBGA code is the 5-character package marking that maps back to the full module part number. It is the single most useful remarking discriminator, because a re-labeller rarely gets it right for the specific SKU."
+  },
+  "spd": {
+    "revision": "SPD5 hub (SPD5118)",
+    "moduleManufacturerJep106": "0x2C",
+    "dramManufacturerJep106": "0x2C",
+    "moduleManufacturingLocation": "0x06",
+    "moduleManufacturingDate": "2502",
+    "moduleSerialNumber": "7A3E91C4",
+    "modulePartNumber": "MTC20F2085S1RC48BA1",
+    "note": "On a genuine module the manufacturer, location, date, serial and part-number fields are ALL populated and internally consistent. Remarked modules commonly carry a correct vendor ID with blank assembler and serial bytes, because those are written at module assembly and a re-labeller never writes them."
+  },
+  "modulePcb": {
+    "revision": "E2",
+    "firstBuildDate": "2024-W18",
+    "note": "A DRAM package date code EARLIER than the first build date of the PCB revision it is mounted on is physically impossible. This is the strongest arithmetic check in the fixture set."
+  },
+  "validators": {
+    "dateCodeRegex": "^(2[0-9])(0[1-9]|[1-4][0-9]|5[0-3])$",
+    "dateCodeFormat": "YYWW — 2-digit year, 2-digit ISO week. Week 00 and weeks 54+ do not exist.",
+    "lotCodeRegex": "^[A-Z]{2}[0-9]{4}[A-Z]$",
+    "lotCodeFormat": "2-letter fab/assembly site + YYWW + single-letter sub-lot",
+    "serialRegex": "^[0-9A-F]{8}$",
+    "issuedSerialRanges": [["70000000", "7FFFFFFF"], ["A0000000", "AFFFFFFF"]],
+    "allowedFbgaCodes": ["D8BNJ"],
+    "allowedAssemblySites": ["TAIWAN", "SINGAPORE"],
+    "allowedMarkingMethods": ["laser-etched"],
+    "requiredSpdFieldsPopulated": [
+      "moduleManufacturerJep106",
+      "moduleManufacturingLocation",
+      "moduleManufacturingDate",
+      "moduleSerialNumber",
+      "modulePartNumber"
+    ]
+  },
+  "images": {
+    "label": "data/markings/img/genuine-micron-MTC20F2085S1RC48BA1-label.svg"
+  },
+  "plain": "This is what a real one looks like. The codes printed on the chips are burned in with a laser, every number agrees with every other number, and the sticker carries a serial the manufacturer can trace."
+}

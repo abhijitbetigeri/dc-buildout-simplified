@@ -1,0 +1,205 @@
+# LINEDOWN — ALL marking strings, flat, one per line. GENERATED; edit the .json files.
+# This is the single-file text fallback for beat 5 (counterfeit catch) when Moss image
+# embedding is unavailable. See MILESTONES.md risk register, row M1.
+# Format: <CLASS>|<fixtureId>|<TAG>|<value>
+#   CLASS is GENUINE, SUSPECT or PATTERN.
+# Every discriminator the beat needs is a string, regex, range or date comparison over these
+# lines. Grep for TAG=FINDING to get the six failures on the broker lot with their methods.
+# ILLUSTRATIVE: all marking strings, lot codes and serials are fabricated for the demo and are
+# not real anti-counterfeit reference data.
+# MODULE-LEVEL ONLY: markings on assembled 288-pin RDIMMs. No DRAM die was analysed or implied.
+#
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|FIXTURE|genuine-micron-MTC20F2085S1RC48BA1
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|CLASS|genuine-reference
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|MPN|MTC20F2085S1RC48BA1
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|MANUFACTURER|Micron Technology
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|MODULE_LABEL|MICRON
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|MODULE_LABEL|MTC20F2085S1RC48BA1
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|MODULE_LABEL|64GB 2Rx4 PC5-4800B-RR1-1010-XT
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|MODULE_LABEL|SN: 7A3E91C4
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|MODULE_LABEL|LOT: JW2502A
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|MODULE_LABEL|DC: 2502
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|MODULE_LABEL|ASSEMBLED IN TAIWAN
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|BARCODE|Code 128=MTC20F2085S1RC48BA1
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|BARCODE|DataMatrix ECC200=1P MTC20F2085S1RC48BA1 S 7A3E91C4 1T JW2502A
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PKG_MARKING|MT
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PKG_MARKING|D8BNJ
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PKG_MARKING|JW 2502
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PKG_MARKING|TAIWAN
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PKG_FIELD|markingMethod=laser-etched
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PKG_FIELD|fbgaCode=D8BNJ
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PKG_FIELD|glyphProfile=micron-laser-v3
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PKG_FIELD|characterPitchMm=0.92
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PKG_FIELD|surfaceFinish=uniform moulded epoxy, no abrasion, consistent gloss
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|SPD|revision=SPD5 hub (SPD5118)
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|SPD|moduleManufacturerJep106=0x2C
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|SPD|dramManufacturerJep106=0x2C
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|SPD|moduleManufacturingLocation=0x06
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|SPD|moduleManufacturingDate=2502
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|SPD|moduleSerialNumber=7A3E91C4
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|SPD|modulePartNumber=MTC20F2085S1RC48BA1
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PCB|revision=E2
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PCB|firstBuildDate=2024-W18
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|VALIDATOR|dateCodeRegex=^(2[0-9])(0[1-9]|[1-4][0-9]|5[0-3])$
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|VALIDATOR|dateCodeFormat=YYWW — 2-digit year, 2-digit ISO week. Week 00 and weeks 54+ do not exist.
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|VALIDATOR|lotCodeRegex=^[A-Z]{2}[0-9]{4}[A-Z]$
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|VALIDATOR|lotCodeFormat=2-letter fab/assembly site + YYWW + single-letter sub-lot
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|VALIDATOR|serialRegex=^[0-9A-F]{8}$
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|VALIDATOR|issuedSerialRanges=[["70000000", "7FFFFFFF"], ["A0000000", "AFFFFFFF"]]
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|VALIDATOR|allowedFbgaCodes=["D8BNJ"]
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|VALIDATOR|allowedAssemblySites=["TAIWAN", "SINGAPORE"]
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|VALIDATOR|allowedMarkingMethods=["laser-etched"]
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|VALIDATOR|requiredSpdFieldsPopulated=["moduleManufacturerJep106", "moduleManufacturingLocation", "moduleManufacturingDate", "moduleSerialNumber", "modulePartNumber"]
+GENUINE|genuine-micron-MTC20F2085S1RC48BA1|PLAIN|This is what a real one looks like. The codes printed on the chips are burned in with a laser, every number agrees with every other number, and the sticker carries a serial the manufacturer can trace.
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|FIXTURE|genuine-samsung-M321R8GA0BB0-CQK
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|CLASS|genuine-reference
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|MPN|M321R8GA0BB0-CQK
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|MANUFACTURER|Samsung Semiconductor
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|MODULE_LABEL|SAMSUNG
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|MODULE_LABEL|M321R8GA0BB0-CQK
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|MODULE_LABEL|64GB 2Rx4 PC5-4800B-RR2-1010-XT
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|MODULE_LABEL|SN: C4F20A77
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|MODULE_LABEL|LOT: GTW2608B
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|MODULE_LABEL|DC: 2608
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|MODULE_LABEL|MADE IN KOREA
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|BARCODE|Code 128=M321R8GA0BB0-CQK
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|BARCODE|DataMatrix ECC200=1P M321R8GA0BB0-CQK S C4F20A77 1T GTW2608B
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PKG_MARKING|SAMSUNG 608
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PKG_MARKING|K4RAH086VB-BCQK
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PKG_MARKING|GTW2608B
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PKG_MARKING|KOREA
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PKG_FIELD|markingMethod=laser-etched
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PKG_FIELD|componentPartNumber=K4RAH086VB-BCQK
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PKG_FIELD|glyphProfile=samsung-laser-v2
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PKG_FIELD|characterPitchMm=0.95
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PKG_FIELD|surfaceFinish=uniform moulded epoxy, no abrasion, consistent gloss
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|SPD|revision=SPD5 hub (SPD5118)
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|SPD|moduleManufacturerJep106=0xCE
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|SPD|dramManufacturerJep106=0xCE
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|SPD|moduleManufacturingLocation=0x01
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|SPD|moduleManufacturingDate=2608
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|SPD|moduleSerialNumber=C4F20A77
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|SPD|modulePartNumber=M321R8GA0BB0-CQK
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PCB|revision=A1
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PCB|firstBuildDate=2025-W31
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|VALIDATOR|dateCodeRegex=^(2[0-9])(0[1-9]|[1-4][0-9]|5[0-3])$
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|VALIDATOR|lotCodeRegex=^[A-Z]{3}[0-9]{4}[A-Z]$
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|VALIDATOR|serialRegex=^[0-9A-F]{8}$
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|VALIDATOR|issuedSerialRanges=[["C0000000", "CFFFFFFF"]]
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|VALIDATOR|allowedComponentPartNumbers=["K4RAH086VB-BCQK"]
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|VALIDATOR|allowedAssemblySites=["KOREA", "CHINA"]
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|VALIDATOR|allowedMarkingMethods=["laser-etched"]
+GENUINE|genuine-samsung-M321R8GA0BB0-CQK|PLAIN|The part we actually bought. Laser-burned codes, a traceable serial number, a working tracking code, and every date agreeing with every other date.
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|FIXTURE|genuine-skhynix-HMCG94MEBRA109N
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|CLASS|genuine-reference
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|MPN|HMCG94MEBRA109N
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|MANUFACTURER|SK hynix
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|MODULE_LABEL|SK hynix
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|MODULE_LABEL|HMCG94MEBRA109N
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|MODULE_LABEL|64GB 2Rx4 PC5-4800B-RR2-1010-XT
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|MODULE_LABEL|SN: AD5B1E09
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|MODULE_LABEL|LOT: KR2611C
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|MODULE_LABEL|DC: 2611
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|MODULE_LABEL|MADE IN KOREA
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|BARCODE|Code 128=HMCG94MEBRA109N
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|BARCODE|DataMatrix ECC200=1P HMCG94MEBRA109N S AD5B1E09 1T KR2611C
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PKG_MARKING|SK hynix
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PKG_MARKING|H5CG48MEBDX014
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PKG_MARKING|KR2611C
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PKG_MARKING|KOREA
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PKG_FIELD|markingMethod=laser-etched
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PKG_FIELD|componentPartNumber=H5CG48MEBDX014
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PKG_FIELD|glyphProfile=skhynix-laser-v1
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PKG_FIELD|characterPitchMm=0.9
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PKG_FIELD|surfaceFinish=uniform moulded epoxy, no abrasion, consistent gloss
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PKG_FIELD|dieRevisionMarked=M
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|SPD|revision=SPD5 hub (SPD5118)
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|SPD|moduleManufacturerJep106=0xAD
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|SPD|dramManufacturerJep106=0xAD
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|SPD|moduleManufacturingLocation=0x02
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|SPD|moduleManufacturingDate=2611
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|SPD|moduleSerialNumber=AD5B1E09
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|SPD|modulePartNumber=HMCG94MEBRA109N
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PCB|revision=B1
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PCB|firstBuildDate=2025-W44
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|VALIDATOR|dateCodeRegex=^(2[0-9])(0[1-9]|[1-4][0-9]|5[0-3])$
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|VALIDATOR|lotCodeRegex=^[A-Z]{2}[0-9]{4}[A-Z]$
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|VALIDATOR|serialRegex=^[0-9A-F]{8}$
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|VALIDATOR|issuedSerialRanges=[["A0000000", "AFFFFFFF"]]
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|VALIDATOR|allowedComponentPartNumbers=["H5CG48MEBDX014"]
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|VALIDATOR|allowedAssemblySites=["KOREA", "CHINA"]
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|VALIDATOR|allowedMarkingMethods=["laser-etched"]
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|VALIDATOR|requiredSpdFieldsPopulated=["moduleManufacturerJep106", "moduleManufacturingLocation", "moduleManufacturingDate", "moduleSerialNumber", "modulePartNumber"]
+GENUINE|genuine-skhynix-HMCG94MEBRA109N|PLAIN|A third genuine example, from the supplier we turned down purely because it could not deliver in time. Its markings are perfectly clean — we said no to the schedule, not to the part.
+SUSPECT|suspect-broker-lot-PRC-24817|FIXTURE|suspect-broker-lot-PRC-24817
+SUSPECT|suspect-broker-lot-PRC-24817|CLASS|suspect-counterfeit
+SUSPECT|suspect-broker-lot-PRC-24817|CLAIMEDMPN|MTC20F2085S1RC48BA1
+SUSPECT|suspect-broker-lot-PRC-24817|CLAIMEDMANUFACTURER|Micron Technology
+SUSPECT|suspect-broker-lot-PRC-24817|SUPPLIER|Pacific Rim Components Ltd. (HK)
+SUSPECT|suspect-broker-lot-PRC-24817|LOTCODE|PRC-24817
+SUSPECT|suspect-broker-lot-PRC-24817|MODULE_LABEL|MICRON
+SUSPECT|suspect-broker-lot-PRC-24817|MODULE_LABEL|MTC20F2085S1RC48BA1
+SUSPECT|suspect-broker-lot-PRC-24817|MODULE_LABEL|64GB 2Rx4 PC5-4800B-RR1-1010-XT
+SUSPECT|suspect-broker-lot-PRC-24817|MODULE_LABEL|SN: 00000000
+SUSPECT|suspect-broker-lot-PRC-24817|MODULE_LABEL|LOT: PRC24817
+SUSPECT|suspect-broker-lot-PRC-24817|MODULE_LABEL|DC: 2341
+SUSPECT|suspect-broker-lot-PRC-24817|MODULE_LABEL|MADE IN CHINA
+SUSPECT|suspect-broker-lot-PRC-24817|BARCODE|Code 128=MTC20F2085S1RC48BA1
+SUSPECT|suspect-broker-lot-PRC-24817|BARCODE|DataMatrix ECC200=ABSENT
+SUSPECT|suspect-broker-lot-PRC-24817|PKG_MARKING|MT
+SUSPECT|suspect-broker-lot-PRC-24817|PKG_MARKING|D8BQK
+SUSPECT|suspect-broker-lot-PRC-24817|PKG_MARKING|JW 2341
+SUSPECT|suspect-broker-lot-PRC-24817|PKG_MARKING|TAIWAN
+SUSPECT|suspect-broker-lot-PRC-24817|PKG_FIELD|markingMethod=ink-overprint-on-abraded-surface
+SUSPECT|suspect-broker-lot-PRC-24817|PKG_FIELD|fbgaCode=D8BQK
+SUSPECT|suspect-broker-lot-PRC-24817|PKG_FIELD|glyphProfile=generic-sans
+SUSPECT|suspect-broker-lot-PRC-24817|PKG_FIELD|characterPitchMm=1.05
+SUSPECT|suspect-broker-lot-PRC-24817|PKG_FIELD|surfaceFinish=visible sanding swirl, matte patch under marking, gloss mismatch against package edges
+SUSPECT|suspect-broker-lot-PRC-24817|SPD|revision=SPD5 hub (SPD5118)
+SUSPECT|suspect-broker-lot-PRC-24817|SPD|moduleManufacturerJep106=0x2C
+SUSPECT|suspect-broker-lot-PRC-24817|SPD|dramManufacturerJep106=0x2C
+SUSPECT|suspect-broker-lot-PRC-24817|SPD|moduleManufacturingLocation=0x00
+SUSPECT|suspect-broker-lot-PRC-24817|SPD|moduleManufacturingDate=0000
+SUSPECT|suspect-broker-lot-PRC-24817|SPD|moduleSerialNumber=00000000
+SUSPECT|suspect-broker-lot-PRC-24817|SPD|modulePartNumber=MTC20F2085S1RC48BA1
+SUSPECT|suspect-broker-lot-PRC-24817|PCB|revision=E2
+SUSPECT|suspect-broker-lot-PRC-24817|SUBLOT|PRC-24817-A dateCode=2341 units=2304
+SUSPECT|suspect-broker-lot-PRC-24817|SUBLOT|PRC-24817-B dateCode=2354 units=2304
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING|F1 FAIL [critical] fbgaCode in genuine.validators.allowedFbgaCodes | expected=D8BNJ | observed=D8BQK | method=string lookup
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING_PLAIN|F1 The code printed on the chips is not the code this exact part uses.
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING|F2 FAIL [critical] dramDateCode integrity and consistency with modulePcb.firstBuildDate | expected=valid YYWW, not earlier than 2024-W18 (PCB rev E2 first build) | observed=sub-lot A = 2341 (2023 week 41); sub-lot B = 2354 (week 54 does not exist) | method=regex + date comparison
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING_PLAIN|F2 The dates do not add up. One batch says the chips are older than the board they are mounted on. The other batch has a date that cannot exist.
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING|F3 FAIL [critical] markingMethod in genuine.validators.allowedMarkingMethods | expected=laser-etched | observed=ink-overprint-on-abraded-surface | method=string comparison + surface inspection
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING_PLAIN|F3 The original markings were sanded off and new ones printed on top. You can see the scratch marks.
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING|F4 FAIL [high] glyphProfile and characterPitchMm match genuine reference | expected=micron-laser-v3, pitch 0.92mm | observed=generic-sans, pitch 1.05mm | method=string comparison + measured pitch
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING_PLAIN|F4 The lettering is the wrong font and the wrong size.
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING|F5 FAIL [critical] moduleSerialNumber matches serialRegex and falls inside issuedSerialRanges; DataMatrix present | expected=8 hex chars within an issued range, plus a readable DataMatrix | observed=serial 00000000 (outside every issued range), DataMatrix absent | method=regex + range check
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING_PLAIN|F5 There is no serial number the manufacturer can look up, and the square tracking code is missing entirely. Every stick we checked had the same blank serial.
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING|F6 FAIL [critical] all genuine.validators.requiredSpdFieldsPopulated are non-zero | expected=manufacturer, location, date, serial and part number all populated and consistent | observed=moduleManufacturerJep106 = 0x2C (correct) but location 0x00, date 0000, serial 00000000 all blank | method=SPD byte read
+SUSPECT|suspect-broker-lot-PRC-24817|FINDING_PLAIN|F6 The stick's internal data chip says 'Micron' but has no record of where or when it was actually made. Those details are written at the factory, so their absence means this stick did not come off that factory's line.
+SUSPECT|suspect-broker-lot-PRC-24817|SIMILARITY|ref-remarked-cluster-A=0.93
+SUSPECT|suspect-broker-lot-PRC-24817|SIMILARITY|ref-genuine-micron-MTC20F2085S1RC48BA1=0.41
+SUSPECT|suspect-broker-lot-PRC-24817|SIMILARITY|ref-genuine-samsung-M321R8GA0BB0-CQK=0.18
+SUSPECT|suspect-broker-lot-PRC-24817|VERDICT|COUNTERFEIT — REMARKED MODULE
+SUSPECT|suspect-broker-lot-PRC-24817|VERDICT_CONFIDENCE|high — six independent discriminators, three of them individually sufficient
+SUSPECT|suspect-broker-lot-PRC-24817|VERDICT_PLAIN|Fake. Six separate checks all failed, and any one of three of them would have been enough on its own. Refusing this lot looks like giving up a $364,000 discount — it actually avoids about $1.07M in scrapped parts and rebuilt servers, so the decision is roughly $702,000 better.
+SUSPECT|suspect-broker-lot-PRC-24817|PLAIN|A middleman offered us thousands of the exact part we are short of, immediately, at 29% below our normal price. The markings on the chips were sanded off and reprinted. These are not the part they claim to be, and we cannot tell what is actually inside them.
+PATTERN|reference-remarked-cluster-A|FIXTURE|ref-remarked-cluster-A
+PATTERN|reference-remarked-cluster-A|CLASS|pattern
+PATTERN|reference-remarked-cluster-A|PATTERNNAME|Remarked pattern — reference cluster A
+PATTERN|reference-remarked-cluster-A|PATTERN|P1 w=0.22 sufficient=True surface abrasion with ink overprint | markingMethod != 'laser-etched'; sanding swirl, matte patch under marking, gloss mismatch at package edges
+PATTERN|reference-remarked-cluster-A|PATTERN_PLAIN|P1 The original markings were sanded off and new ones printed on top.
+PATTERN|reference-remarked-cluster-A|PATTERN|P2 w=0.12 sufficient=False wrong glyph profile | glyphProfile not in genuine allowed set; characterPitchMm deviating >8% from the manufacturer's laser glyph set
+PATTERN|reference-remarked-cluster-A|PATTERN_PLAIN|P2 The lettering is the wrong font and the wrong size.
+PATTERN|reference-remarked-cluster-A|PATTERN|P3 w=0.18 sufficient=True absent or unreadable 2D code | DataMatrix present == false, or decodes to nothing
+PATTERN|reference-remarked-cluster-A|PATTERN_PLAIN|P3 The square tracking code is missing, so nothing can be looked up.
+PATTERN|reference-remarked-cluster-A|PATTERN|P4 w=0.18 sufficient=True blank, zeroed or repeated serial | moduleSerialNumber fails serialRegex, falls outside issuedSerialRanges, or repeats across sampled units
+PATTERN|reference-remarked-cluster-A|PATTERN_PLAIN|P4 No traceable serial number, or the same serial on every stick in the box.
+PATTERN|reference-remarked-cluster-A|PATTERN|P5 w=0.18 sufficient=True SPD vendor ID present, assembler bytes blank | moduleManufacturerJep106 populated but moduleManufacturingLocation / Date / SerialNumber all zero
+PATTERN|reference-remarked-cluster-A|PATTERN_PLAIN|P5 The internal data chip names a manufacturer but has no record of where or when the stick was built. Those details are written at the real factory.
+PATTERN|reference-remarked-cluster-A|PATTERN|P6 w=0.12 sufficient=True date-code incoherence | date code failing YYWW regex (week 00 or 54+), or earlier than the first build date of the module PCB revision it is mounted on
+PATTERN|reference-remarked-cluster-A|PATTERN_PLAIN|P6 The dates do not add up — chips older than the board they are soldered to, or a week number that cannot exist.
+PATTERN|reference-remarked-cluster-A|SIMILARITY|suspect-broker-lot-PRC-24817=0.93 verdict=REJECT
+PATTERN|reference-remarked-cluster-A|SIMILARITY|genuine-micron-MTC20F2085S1RC48BA1=0.0 verdict=PASS
+PATTERN|reference-remarked-cluster-A|SIMILARITY|genuine-samsung-M321R8GA0BB0-CQK=0.0 verdict=PASS
+PATTERN|reference-remarked-cluster-A|PLAIN|A checklist of the six things relabelled memory almost always gets wrong. Any one of four of them is enough to refuse a whole shipment on its own. The broker's sticks matched all six.

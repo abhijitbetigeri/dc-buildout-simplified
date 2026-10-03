@@ -1,0 +1,82 @@
+{
+  "_comment": [
+    "LINEDOWN — GENUINE reference marking fixture for the SCHEDULE-REJECTED candidate (cand-04).",
+    "Included for completeness of the genuine reference set: all three tier-1 modules the desk",
+    "actually considered have a clean marking record on file. This one also makes the point that",
+    "cand-04 was rejected on LEAD TIME ALONE — there is nothing wrong with the part, its markings",
+    "are clean, and it stays on the QVL. A schedule reject is not a quality reject.",
+    "ILLUSTRATIVE: marking strings, lot codes and serial ranges are plausible and format-correct",
+    "but fabricated. Not transcribed from real SK hynix parts.",
+    "MODULE vs DIE: describes markings on a complete 288-pin RDIMM assembly. The component part",
+    "number under `dramPackageTopMarking` is recorded because it is physically printed on the",
+    "packages, NOT because anything here substitutes die.",
+    "No SVG label was authored for this fixture — it is not shown in beat 5, which compares the",
+    "suspect lot against the Micron incumbent (the part it claims to be) and the Samsung winner",
+    "(the low-similarity control). Text only is correct here."
+  ],
+  "fixtureId": "genuine-skhynix-HMCG94MEBRA109N",
+  "class": "genuine-reference",
+  "mpn": "HMCG94MEBRA109N",
+  "manufacturer": "SK hynix",
+  "partLabel": "64GB DDR5-4800 RDIMM, 2Rx4, 1.1V, 31.25mm, 288-pin",
+  "jep106": { "bank": 1, "id": "0xAD", "vendor": "SK hynix" },
+  "candidateId": "cand-04",
+  "qvlRef": { "qvlRevision": "QVL-G4-2026.08-rev-D", "validationReportId": "MV-G4-0291" },
+  "dispositionNote": "Rejected in this run on schedule only — 14-week factory lead time against an 11-day kit date. Remains qualified on the QVL.",
+  "moduleLabel": {
+    "substrate": "white polyimide adhesive label, heat-spreader mounted",
+    "lines": [
+      "SK hynix",
+      "HMCG94MEBRA109N",
+      "64GB 2Rx4 PC5-4800B-RR2-1010-XT",
+      "SN: AD5B1E09",
+      "LOT: KR2611C",
+      "DC: 2611",
+      "MADE IN KOREA"
+    ],
+    "barcodes": [
+      { "symbology": "Code 128", "encodes": "HMCG94MEBRA109N" },
+      { "symbology": "DataMatrix ECC200", "encodes": "1P HMCG94MEBRA109N S AD5B1E09 1T KR2611C" }
+    ]
+  },
+  "dramPackageTopMarking": {
+    "markingMethod": "laser-etched",
+    "surfaceFinish": "uniform moulded epoxy, no abrasion, consistent gloss",
+    "componentPartNumber": "H5CG48MEBDX014",
+    "lines": ["SK hynix", "H5CG48MEBDX014", "KR2611C", "KOREA"],
+    "glyphProfile": "skhynix-laser-v1",
+    "characterPitchMm": 0.9,
+    "logoPresent": true,
+    "packageCount": 36,
+    "dieRevisionMarked": "M",
+    "note": "The marked die revision M corresponds to the module build recorded in validation report MV-G4-0291. It is a descriptor of what was on the bench, NOT a substitutable attribute. The superseded A-revision build (HMCG94AGBRA109N) is a separate MPN and is withdrawn from the QVL."
+  },
+  "spd": {
+    "revision": "SPD5 hub (SPD5118)",
+    "moduleManufacturerJep106": "0xAD",
+    "dramManufacturerJep106": "0xAD",
+    "moduleManufacturingLocation": "0x02",
+    "moduleManufacturingDate": "2611",
+    "moduleSerialNumber": "AD5B1E09",
+    "modulePartNumber": "HMCG94MEBRA109N"
+  },
+  "modulePcb": { "revision": "B1", "firstBuildDate": "2025-W44" },
+  "validators": {
+    "dateCodeRegex": "^(2[0-9])(0[1-9]|[1-4][0-9]|5[0-3])$",
+    "lotCodeRegex": "^[A-Z]{2}[0-9]{4}[A-Z]$",
+    "serialRegex": "^[0-9A-F]{8}$",
+    "issuedSerialRanges": [["A0000000", "AFFFFFFF"]],
+    "allowedComponentPartNumbers": ["H5CG48MEBDX014"],
+    "allowedAssemblySites": ["KOREA", "CHINA"],
+    "allowedMarkingMethods": ["laser-etched"],
+    "requiredSpdFieldsPopulated": [
+      "moduleManufacturerJep106",
+      "moduleManufacturingLocation",
+      "moduleManufacturingDate",
+      "moduleSerialNumber",
+      "modulePartNumber"
+    ]
+  },
+  "images": { "label": null },
+  "plain": "A third genuine example, from the supplier we turned down purely because it could not deliver in time. Its markings are perfectly clean — we said no to the schedule, not to the part."
+}

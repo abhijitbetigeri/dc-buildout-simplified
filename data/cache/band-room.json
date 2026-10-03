@@ -1,0 +1,33 @@
+{
+  "claim": "LINEDOWN mirrored its real run transcript into a BAND room. BAND carries the narration; it does not orchestrate the run and does not enforce the block.",
+  "generatedAt": "2026-10-03T23:37:41.178Z",
+  "runtime": {
+    "node": "v22.22.3",
+    "transport": "REST over fetch",
+    "base": "https://app.band.ai/api/v1/agent"
+  },
+  "sdkNote": "@band-ai/sdk@0.5.0 requires Node >=22.12 and exposes room tools only inside agent.run(), a daemon that never returns. This repo is Node 20 and needs a one-shot, so we call the documented REST surface directly.",
+  "auth": {
+    "ok": false,
+    "agent": null,
+    "error": "BAND_API_KEY is empty in .env. Register an agent at https://app.band.ai/agents to get the agent_id + api_key pair."
+  },
+  "room": {
+    "id": null,
+    "source": "none",
+    "created": false
+  },
+  "participants": [],
+  "participantList": null,
+  "transcript": {
+    "source": "data/mock-events.json",
+    "totalEvents": 55,
+    "mapped": 36,
+    "posted": 0,
+    "failed": 0
+  },
+  "posted": [],
+  "limitations": [
+    "NOT RUN: no BAND_API_KEY."
+  ]
+}

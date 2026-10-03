@@ -1,0 +1,28 @@
+# LINEDOWN marking fixture — flat text sidecar.
+# GENERATED from the sibling .json. Edit the .json, not this file.
+# Purpose: the text-match fallback for beat 5. If Moss image embedding is unavailable
+# (MILESTONES.md risk register, M1), every discriminator in beat 5 is still reachable from
+# these lines using string, regex, range and date comparisons alone.
+# Format: TAB-separated. <TAG>\t<value>   — grep-friendly and embedding-friendly.
+# ILLUSTRATIVE: all marking strings, lot codes and serials are fabricated for the demo.
+# MODULE-LEVEL ONLY: these are markings on an assembled 288-pin RDIMM. No die analysis.
+#
+FIXTURE	ref-remarked-cluster-A
+CLASS	pattern
+PATTERNNAME	Remarked pattern — reference cluster A
+PATTERN	P1 w=0.22 sufficient=True surface abrasion with ink overprint | markingMethod != 'laser-etched'; sanding swirl, matte patch under marking, gloss mismatch at package edges
+PATTERN_PLAIN	P1 The original markings were sanded off and new ones printed on top.
+PATTERN	P2 w=0.12 sufficient=False wrong glyph profile | glyphProfile not in genuine allowed set; characterPitchMm deviating >8% from the manufacturer's laser glyph set
+PATTERN_PLAIN	P2 The lettering is the wrong font and the wrong size.
+PATTERN	P3 w=0.18 sufficient=True absent or unreadable 2D code | DataMatrix present == false, or decodes to nothing
+PATTERN_PLAIN	P3 The square tracking code is missing, so nothing can be looked up.
+PATTERN	P4 w=0.18 sufficient=True blank, zeroed or repeated serial | moduleSerialNumber fails serialRegex, falls outside issuedSerialRanges, or repeats across sampled units
+PATTERN_PLAIN	P4 No traceable serial number, or the same serial on every stick in the box.
+PATTERN	P5 w=0.18 sufficient=True SPD vendor ID present, assembler bytes blank | moduleManufacturerJep106 populated but moduleManufacturingLocation / Date / SerialNumber all zero
+PATTERN_PLAIN	P5 The internal data chip names a manufacturer but has no record of where or when the stick was built. Those details are written at the real factory.
+PATTERN	P6 w=0.12 sufficient=True date-code incoherence | date code failing YYWW regex (week 00 or 54+), or earlier than the first build date of the module PCB revision it is mounted on
+PATTERN_PLAIN	P6 The dates do not add up — chips older than the board they are soldered to, or a week number that cannot exist.
+SIMILARITY	suspect-broker-lot-PRC-24817=0.93 verdict=REJECT
+SIMILARITY	genuine-micron-MTC20F2085S1RC48BA1=0.0 verdict=PASS
+SIMILARITY	genuine-samsung-M321R8GA0BB0-CQK=0.0 verdict=PASS
+PLAIN	A checklist of the six things relabelled memory almost always gets wrong. Any one of four of them is enough to refuse a whole shipment on its own. The broker's sticks matched all six.

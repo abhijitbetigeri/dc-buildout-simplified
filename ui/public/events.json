@@ -1,0 +1,875 @@
+{
+ "_comment": [
+  "LINEDOWN — mock event log. Complete, replayable 7-beat run conforming to docs/EVENT-SCHEMA.md.",
+  "Paced over ~148s of `ts` offsets (ms) so it plays as a 2.5-minute demo.",
+  "ALL PRICING IS ILLUSTRATIVE. Unit prices, spot-price deltas, lead times and the dollar",
+  "counters are plausible figures chosen for the demo, NOT quoted market data. The AGENTS",
+  "track may replace them with live Tavily results; nothing downstream should treat them as fact.",
+  "Tavily source titles/URLs in e007 are PLACEHOLDERS shaped like real results, to be replaced",
+  "by a live Tavily call (milestone M9). Do not present them as retrieved citations.",
+  "PART NUMBERS: Micron / Samsung / SK hynix / Kingston MPNs are real market part numbers for",
+  "64GB 2Rx4 DDR5-4800 RDIMMs. The tier-2 (V-color) MPN and the broker lot code are",
+  "format-correct but illustrative.",
+  "MODULE vs DIE: this run sources an alternate MODULE (a complete RDIMM assembly). It never",
+  "substitutes DRAM die inside a module. Die revision appears only as a descriptor of the",
+  "as-validated module build. Keep this distinction in any narration.",
+  "SCHEMA NOTE: one additive `tool.result` kind is used — `qvl.lookup` (e024). Everything the",
+  "demo needs is ALSO carried by the following `block.raised`, so a UI that renders unknown",
+  "kinds as a neutral card loses nothing. Flagged in status/data.md.",
+  "PROVENANCE — DO NOT LOOSEN: e023 carries `tool: \"qvl\"`, not `tool: \"zoodata\"`, because in",
+  "replay this beat reads data/qvl.json off local disk. ZooData is ZooWork's URL-to-structured-",
+  "JSON product; labelling a local file read `zoodata.*` would claim a sponsor integration we are",
+  "not making, and a judge probing the ZooWork prize would find it. AGENTS may change `tool` to",
+  "\"zoodata\" at M8 IF AND ONLY IF the lookup genuinely routes through ZooData. Our pitch is",
+  "provenance — we do not get to be loose about our own.",
+  "MOSS LATENCY: e012 latencyMs 0.22 and e036/e037 latencyMs 0.2 are MOSS's MEASURED local-backend",
+  "query times (status/moss.md), not invented figures. Two rules from the MOSS track: never add",
+  "Moss's parseMs to latencyMs, and the stage wording is 'on-device retrieval', NOT 'fully",
+  "offline' — index creation is a cloud operation, only the query is local. The `plain` strings",
+  "are worded to that limit on purpose. Do not upgrade them to an offline claim.",
+  "MONEY COUNTER: burnRatePerMin 1240 = $1.79M/day blended program exposure. The hero number is",
+  "run.ended.dollarsSaved ($2,487,600), not the 150-second counter (~$3.1k). UI may prime the",
+  "counter with accrued time since the allocation notice if a bigger on-screen number is wanted."
+ ],
+ "runId": "ld-run-20261003-1402",
+ "program": "AI-SRV-G4 — 480 node cluster",
+ "durationMs": 148000,
+ "events": [
+  {
+   "id": "e001",
+   "ts": 0,
+   "type": "alert.raised",
+   "payload": {
+    "part": "MTC20F2085S1RC48BA1",
+    "partLabel": "64GB DDR5-4800 RDIMM (2Rx4)",
+    "program": "AI-SRV-G4 — 480 node cluster",
+    "qtyAtRisk": 4608,
+    "burnRatePerMin": 1240,
+    "deadlineLabel": "Build-1 kits due in 11 days",
+    "reason": "Supplier cut allocation 40% — DDR5 wafer starts reallocated to HBM",
+    "plain": "Our main memory supplier just said they will ship 40% less than we ordered. We are 4,608 memory sticks short, and the factory needs them in 11 days. Every minute without a decision costs about $1,240 in idle line time and late-delivery penalties — roughly $1.8M a day."
+   }
+  },
+  {
+   "id": "e002",
+   "ts": 1800,
+   "type": "agent.message",
+   "payload": {
+    "agent": "intake",
+    "role": "Intake",
+    "text": "Allocation notice in at 14:02. AI-SRV-G4 memory line, MTC20F2085S1RC48BA1. Committed 11,520 modules, confirmed 6,912. Shortfall 4,608. Reason given: wafer reallocation to HBM4.",
+    "plain": "The supplier's letter arrived. We ordered 11,520 memory sticks, they will only send 6,912. We are short 4,608 because they moved production to a more profitable AI memory product."
+   }
+  },
+  {
+   "id": "e003",
+   "ts": 4200,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "11,520 was 24 modules a node across 480 nodes. Short 4,608 means 192 nodes don't ship. Build-1 kits drop in 11 days. Engineering — before you say it, I am not re-spec'ing the board.",
+    "plain": "Each server needs 24 memory sticks. Being short 4,608 means 192 of the 480 servers cannot be built. Redesigning the server is not an option this late."
+   }
+  },
+  {
+   "id": "e004",
+   "ts": 7000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "engineering",
+    "role": "Engineering",
+    "text": "You couldn't anyway. 24 slots, one DIMM per channel, 4800 MT/s at rated. What you're buying is a replacement MODULE — a whole RDIMM assembly. We are not swapping DRAM die inside a module; what's on the module is the module vendor's qualification, not mine.",
+    "plain": "We need a drop-in replacement for the whole memory stick. We are not changing the chips inside a stick — that is the stick maker's responsibility, and mixing it up is how you break a server."
+   }
+  },
+  {
+   "id": "e005",
+   "ts": 9500,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "Understood. Pull the QVL and I'll go shopping inside it. Market — where is the money going this week?",
+    "plain": "Sourcing asks for the approved-parts list for this server, and for a read on where prices are heading."
+   }
+  },
+  {
+   "id": "e006",
+   "ts": 12000,
+   "type": "tool.call",
+   "payload": {
+    "callId": "t1",
+    "agent": "market",
+    "tool": "tavily",
+    "label": "Pulling DDR5 RDIMM spot pricing, stock and allocation news",
+    "status": "running",
+    "plain": "Searching the open market right now for prices, who has stock, and any news about the shortage."
+   }
+  },
+  {
+   "id": "e007",
+   "ts": 17500,
+   "type": "tool.result",
+   "payload": {
+    "callId": "t1",
+    "kind": "tavily.sources",
+    "payload": {
+     "_illustrative": true,
+     "_note": "Placeholder results shaped like live Tavily output. Replace at M9. Not retrieved citations; prices are illustrative.",
+     "sources": [
+      {
+       "title": "Server DDR5 RDIMM contract prices up 34% QoQ as HBM capacity crowds out conventional DRAM",
+       "url": "https://www.trendforce.com/presscenter/news/20260922-ddr5-rdimm-contract-q3.html",
+       "snippet": "64GB DDR5-4800 RDIMM contract pricing rose 34% quarter-on-quarter. Suppliers are converting DDR5 wafer starts to HBM4, with conventional RDIMM allocation cut across tier-1 ODM accounts."
+      },
+      {
+       "title": "Micron extends DDR5 RDIMM lead times to 16+ weeks on HBM reallocation",
+       "url": "https://www.digitimes.com/news/a20260918pd200.html",
+       "snippet": "Lead times on 64GB 2Rx4 DDR5-4800 modules have moved from 8 to 16-18 weeks. Buyers report confirmed quantities being reduced 30-45% against existing POs."
+      },
+      {
+       "title": "Samsung M321R8GA0BB0-CQK — 5,100 pcs ex-stock, franchised distribution",
+       "url": "https://www.arrow.com/en/products/m321r8ga0bb0-cqk/samsung-semiconductor",
+       "snippet": "64GB 2Rx4 PC5-4800B RDIMM. 5,100 units available from franchised stock. ARO 5 working days. Full manufacturer traceability and C of C available."
+      },
+      {
+       "title": "ERAI advisory: remarked DDR5 RDIMM lots circulating through HK / Shenzhen brokerage",
+       "url": "https://www.erai.com/alerts/2026/remarked-ddr5-rdimm-advisory",
+       "snippet": "Multiple reports of 64GB DDR5 RDIMMs offered 25-30% below contract with ex-stock availability on allocated part numbers. Modules show sanded and over-printed DRAM package markings and inconsistent lot/date codes."
+      }
+     ]
+    },
+    "plain": "The search came back: prices are up about a third in three months, normal delivery is now four months, one brand has stock right now — and there is an official industry warning about fake memory being sold cheap through middlemen."
+   }
+  },
+  {
+   "id": "e008",
+   "ts": 20000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "market",
+    "role": "Market",
+    "text": "Up 34% quarter on quarter and still climbing. Sixteen-week lead times across all three majors. Waiting one week costs you more than any premium you're trying to negotiate away.",
+    "plain": "Prices are rising fast and normal orders now take four months. Delaying the decision costs more than paying a bit extra today."
+   }
+  },
+  {
+   "id": "e009",
+   "ts": 23500,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "I need parts, not a chart. Who physically has 4,608 modules in a warehouse I can audit?",
+    "plain": "Sourcing wants actual stock from a supplier we can inspect, not a market forecast."
+   }
+  },
+  {
+   "id": "e010",
+   "ts": 26000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "market",
+    "role": "Market",
+    "text": "Then note this too: anything not already sitting in bonded stock is a next-quarter part. Your option space is whatever is on a shelf today.",
+    "plain": "If it is not already in a warehouse, it will not arrive in time. Only existing stock counts."
+   }
+  },
+  {
+   "id": "e011",
+   "ts": 29000,
+   "type": "tool.call",
+   "payload": {
+    "callId": "m1",
+    "agent": "sourcing",
+    "tool": "moss",
+    "label": "Decoding MPN · searching cross-vendor module equivalents",
+    "status": "running",
+    "plain": "Reading the supplier's part code to work out exactly what the stick is, then finding the same stick made by other brands."
+   }
+  },
+  {
+   "id": "e012",
+   "ts": 32500,
+   "type": "tool.result",
+   "payload": {
+    "callId": "m1",
+    "kind": "moss.partmatch",
+    "payload": {
+     "query": "MTC20F2085S1RC48BA1",
+     "decoded": {
+      "manufacturer": "Micron Technology",
+      "moduleType": "RDIMM (registered DIMM, 288-pin)",
+      "capacity": "64GB",
+      "organization": "2Rx4",
+      "speed": "4800 MT/s (PC5-38400B)",
+      "cas": "CL40",
+      "voltage": "1.1V",
+      "height": "31.25mm",
+      "ecc": "on-die ECC + module side-band ECC",
+      "pmic": "on-module PMIC, SPD5 hub",
+      "note": "Module-level descriptor. Alternates below are complete RDIMM assemblies, not die substitutions."
+     },
+     "equivalents": [
+      {
+       "mpn": "M321R8GA0BB0-CQK",
+       "vendor": "Samsung",
+       "score": 0.99,
+       "specs": {
+        "capacity": "64GB",
+        "organization": "2Rx4",
+        "speed": "4800 MT/s (PC5-38400B)",
+        "formFactor": "RDIMM 288-pin",
+        "voltage": "1.1V",
+        "height": "31.25mm"
+       }
+      },
+      {
+       "mpn": "HMCG94MEBRA109N",
+       "vendor": "SK hynix",
+       "score": 0.99,
+       "specs": {
+        "capacity": "64GB",
+        "organization": "2Rx4",
+        "speed": "4800 MT/s (PC5-38400B)",
+        "formFactor": "RDIMM 288-pin",
+        "voltage": "1.1V",
+        "height": "31.25mm"
+       }
+      },
+      {
+       "mpn": "KSM48R40BD4TMM-64HMR",
+       "vendor": "Kingston",
+       "score": 0.98,
+       "specs": {
+        "capacity": "64GB",
+        "organization": "2Rx4",
+        "speed": "4800 MT/s (PC5-38400B)",
+        "formFactor": "RDIMM 288-pin",
+        "voltage": "1.1V",
+        "height": "31.25mm"
+       }
+      },
+      {
+       "mpn": "TRA564G48D436O",
+       "vendor": "V-color",
+       "score": 0.97,
+       "specs": {
+        "capacity": "64GB",
+        "organization": "2Rx4",
+        "speed": "4800 MT/s (PC5-38400B)",
+        "formFactor": "RDIMM 288-pin",
+        "voltage": "1.1V",
+        "height": "31.25mm"
+       }
+      }
+     ],
+     "latencyMs": 0.22
+    },
+    "plain": "Four other brands make an electrically identical stick. The match ran on-device in 0.22 of a millisecond — the query never leaves the laptop, so the desk can afford to do this on every line of the parts list, not just the one that broke."
+   }
+  },
+  {
+   "id": "e013",
+   "ts": 34500,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "Four module houses, four quotes. Electrically all the same part. Commercially they are not remotely the same part.",
+    "plain": "All four options are the same kind of memory stick, but the price, the delivery time and the paperwork behind them are very different."
+   }
+  },
+  {
+   "id": "e014",
+   "ts": 36500,
+   "type": "candidate.added",
+   "payload": {
+    "id": "cand-01",
+    "mpn": "TRA564G48D436O",
+    "vendor": "V-color Technology",
+    "specs": {
+     "capacity": "64GB",
+     "organization": "2Rx4",
+     "speed": "4800 MT/s (PC5-38400B)",
+     "formFactor": "RDIMM 288-pin",
+     "voltage": "1.1V",
+     "height": "31.25mm",
+     "ecc": "on-die + side-band"
+    },
+    "pricePerUnit": 186.4,
+    "leadTimeWeeks": 2,
+    "source": "V-color authorised reseller — APAC",
+    "plain": "Cheapest offer: $186.40 a stick, two weeks out. Same specification on paper."
+   }
+  },
+  {
+   "id": "e015",
+   "ts": 38000,
+   "type": "candidate.added",
+   "payload": {
+    "id": "cand-02",
+    "mpn": "MTC20F2085S1RC48BA1",
+    "vendor": "Micron (offered via broker — Pacific Rim Components Ltd., HK)",
+    "specs": {
+     "capacity": "64GB",
+     "organization": "2Rx4",
+     "speed": "4800 MT/s (PC5-38400B)",
+     "formFactor": "RDIMM 288-pin",
+     "voltage": "1.1V",
+     "height": "31.25mm",
+     "ecc": "on-die + side-band",
+     "lot": "PRC-24817"
+    },
+    "pricePerUnit": 152.75,
+    "leadTimeWeeks": 0,
+    "source": "Open-market broker, non-franchised — ex-stock Hong Kong",
+    "plain": "A middleman is offering the exact part we are short of — immediately, at 29% below our own contract price."
+   }
+  },
+  {
+   "id": "e016",
+   "ts": 39500,
+   "type": "candidate.added",
+   "payload": {
+    "id": "cand-03",
+    "mpn": "M321R8GA0BB0-CQK",
+    "vendor": "Samsung Semiconductor",
+    "specs": {
+     "capacity": "64GB",
+     "organization": "2Rx4",
+     "speed": "4800 MT/s (PC5-38400B)",
+     "formFactor": "RDIMM 288-pin",
+     "voltage": "1.1V",
+     "height": "31.25mm",
+     "ecc": "on-die + side-band"
+    },
+    "pricePerUnit": 231.8,
+    "leadTimeWeeks": 1,
+    "source": "Franchised distributor — 5,100 pcs ex-stock, ARO 5 working days",
+    "plain": "A more expensive offer, $231.80 a stick, but it is in stock now at an official distributor with full paperwork."
+   }
+  },
+  {
+   "id": "e017",
+   "ts": 41000,
+   "type": "candidate.added",
+   "payload": {
+    "id": "cand-04",
+    "mpn": "HMCG94MEBRA109N",
+    "vendor": "SK hynix",
+    "specs": {
+     "capacity": "64GB",
+     "organization": "2Rx4",
+     "speed": "4800 MT/s (PC5-38400B)",
+     "formFactor": "RDIMM 288-pin",
+     "voltage": "1.1V",
+     "height": "31.25mm",
+     "ecc": "on-die + side-band"
+    },
+    "pricePerUnit": 226.5,
+    "leadTimeWeeks": 14,
+    "source": "Franchised distributor — factory order, no stock",
+    "plain": "A good, approved option at $226.50 a stick — but it would not arrive for over three months."
+   }
+  },
+  {
+   "id": "e018",
+   "ts": 43000,
+   "type": "candidate.status",
+   "payload": {
+    "id": "cand-01",
+    "status": "evaluating",
+    "reason": "Commercial review passed; routed to Engineering for platform qualification check",
+    "plain": "Cheapest option goes to Engineering to be checked against the approved-parts list."
+   }
+  },
+  {
+   "id": "e019",
+   "ts": 44000,
+   "type": "candidate.status",
+   "payload": {
+    "id": "cand-02",
+    "status": "evaluating",
+    "reason": "Non-franchised source; routed to Quality for supply-chain and authenticity review",
+    "plain": "The middleman's offer goes to Quality to check it is genuine."
+   }
+  },
+  {
+   "id": "e020",
+   "ts": 45000,
+   "type": "candidate.status",
+   "payload": {
+    "id": "cand-03",
+    "status": "evaluating",
+    "reason": "Franchised source, stock confirmed; routed to Engineering for QVL confirmation",
+    "plain": "The in-stock option is checked against the approved-parts list."
+   }
+  },
+  {
+   "id": "e021",
+   "ts": 46000,
+   "type": "candidate.status",
+   "payload": {
+    "id": "cand-04",
+    "status": "evaluating",
+    "reason": "Franchised source; schedule feasibility under review against 11-day kit date",
+    "plain": "The third-party option is checked to see whether it can possibly arrive in time."
+   }
+  },
+  {
+   "id": "e022",
+   "ts": 48000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "V-color is $45.40 a module under Samsung. On 4,608 pieces that is $209,203 on one BOM line. Engineering, tell me why not — and don't say 'because'.",
+    "plain": "The cheapest option would save about $209,000. Sourcing wants a real reason not to take it."
+   }
+  },
+  {
+   "id": "e023",
+   "ts": 51000,
+   "type": "tool.call",
+   "payload": {
+    "callId": "q1",
+    "agent": "engineering",
+    "tool": "qvl",
+    "label": "QVL lookup — AI-SRV-G4 memory, QVL-G4-2026.08-rev-D",
+    "status": "running",
+    "plain": "Looking up the official list of memory sticks that have actually been tested on this exact server."
+   }
+  },
+  {
+   "id": "e024",
+   "ts": 55000,
+   "type": "tool.result",
+   "payload": {
+    "callId": "q1",
+    "kind": "qvl.lookup",
+    "payload": {
+     "label": "QVL lookup — AI-SRV-G4",
+     "source": "data/qvl.json",
+     "qvlRevision": "QVL-G4-2026.08-rev-D",
+     "lookups": [
+      {
+       "candidateId": "cand-03",
+       "mpn": "M321R8GA0BB0-CQK",
+       "result": "qualified",
+       "validationReportId": "MV-G4-0288",
+       "validatedOn": "2026-05-29",
+       "minBiosVersion": "G4-BIOS-1.3.2"
+      },
+      {
+       "candidateId": "cand-04",
+       "mpn": "HMCG94MEBRA109N",
+       "result": "qualified",
+       "validationReportId": "MV-G4-0291",
+       "validatedOn": "2026-06-11",
+       "minBiosVersion": "G4-BIOS-1.3.2"
+      },
+      {
+       "candidateId": "cand-02",
+       "mpn": "MTC20F2085S1RC48BA1",
+       "result": "qualified",
+       "validationReportId": "MV-G4-0244",
+       "validatedOn": "2026-03-02",
+       "note": "Part number is qualified. Qualification covers the part, not this seller's lot."
+      },
+      {
+       "candidateId": "cand-01",
+       "mpn": "TRA564G48D436O",
+       "result": "not-listed",
+       "specCompare": "all five platform requirements MATCH (64GB / 4800 MT/s / 2Rx4 / RDIMM / 1.1V)",
+       "evaluationQueueId": "EVAL-G4-0412",
+       "evaluationStatus": "submitted 2026-07-02 — thermal margin and 24-slot loading tests incomplete; no RDIMM validation report issued",
+       "note": "Spec-compatible but NOT qualified on this platform. QVL is a record of what was tested, not of what fits."
+      }
+     ],
+     "latencyMs": 11
+    },
+    "plain": "Three of the four part numbers are on the tested list. The cheapest one is not — and note that it matches the specification perfectly. Matching the specification is not the same as having been tested in this server."
+   }
+  },
+  {
+   "id": "e025",
+   "ts": 57000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "engineering",
+    "role": "Engineering",
+    "text": "Because I looked, that's why. Samsung is on rev D, report MV-G4-0288, BIOS 1.3.2. Hynix, MV-G4-0291. Micron is the incumbent, MV-G4-0244. V-color is not on rev D. It's sitting in the eval queue as EVAL-G4-0412 since July — thermal margin and 24-slot loading never finished. Spec sheet matches ours line for line. That buys it nothing.",
+    "plain": "Engineering checked the real list. Three options were tested on this server. The cheap one was submitted for testing in July and the testing was never completed. Its spec sheet looks identical — but nobody has ever run it in this machine."
+   }
+  },
+  {
+   "id": "e026",
+   "ts": 60000,
+   "type": "block.raised",
+   "payload": {
+    "agent": "engineering",
+    "candidateId": "cand-01",
+    "reason": "Not on platform QVL for AI-SRV-G4 (QVL-G4-2026.08-rev-D). Spec-compatible on all five platform requirements, but EVAL-G4-0412 is incomplete — no RDIMM margin or thermal validation report, no 24-slot 1DPC loading data, not covered by shipped BIOS G4-BIOS-1.3.2 memory reference code.",
+    "plain": "This supplier's memory was never tested on this server. It fits on paper, but nobody has ever run 24 of them in one machine at full load. Could take the cluster down."
+   }
+  },
+  {
+   "id": "e027",
+   "ts": 63000,
+   "type": "candidate.status",
+   "payload": {
+    "id": "cand-01",
+    "status": "blocked",
+    "reason": "Engineering block — not on QVL-G4-2026.08-rev-D; EVAL-G4-0412 incomplete",
+    "plain": "Blocked by Engineering. Cheapest, but untested on this server."
+   }
+  },
+  {
+   "id": "e028",
+   "ts": 65500,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "Two hundred and nine thousand, two hundred and three dollars. Say it out loud before you put the block in.",
+    "plain": "Sourcing makes Engineering own the cost of the decision: $209,203."
+   }
+  },
+  {
+   "id": "e029",
+   "ts": 68500,
+   "type": "agent.message",
+   "payload": {
+    "agent": "engineering",
+    "role": "Engineering",
+    "text": "$209,203. Against 192 nodes that train fine for six weeks and then start logging correctable errors at 70C in a hot aisle, and a field return on a customer's $200M cluster. I have seen it. Blocked. Put my name on it.",
+    "plain": "Engineering accepts the cost. Saving $209,000 is not worth servers that fail after the customer has installed them."
+   }
+  },
+  {
+   "id": "e030",
+   "ts": 71500,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "Your name's on it. Hynix next — they're on rev D and they're cheaper than Samsung.",
+    "plain": "Sourcing accepts the block and moves to the next approved option."
+   }
+  },
+  {
+   "id": "e031",
+   "ts": 74000,
+   "type": "candidate.status",
+   "payload": {
+    "id": "cand-04",
+    "status": "rejected",
+    "reason": "Schedule infeasible — 14-week factory lead time against an 11-day Build-1 kit date. No franchised or bonded stock located.",
+    "plain": "Rejected on timing, not on quality. This one is fully approved for the server, but it would arrive three months after the factory needs it."
+   }
+  },
+  {
+   "id": "e032",
+   "ts": 76500,
+   "type": "agent.message",
+   "payload": {
+    "agent": "quality",
+    "role": "Quality",
+    "text": "Before anyone gets to Samsung — somebody explain Pacific Rim to me. 4,608 pieces of an allocated Micron part, ex-stock Hong Kong, 29% under our own contract price. The factory can't get that part. They have 4,608 of them.",
+    "plain": "Quality is suspicious: a middleman claims to have thousands of the exact part that is in shortage, available immediately, far below the normal price. That does not happen."
+   }
+  },
+  {
+   "id": "e033",
+   "ts": 79500,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "Non-franchised. Their story is an excess lot from a cancelled hyperscaler order. Lot PRC-24817, single lot, all one date code.",
+    "plain": "The middleman says the sticks are left over from a big cancelled order."
+   }
+  },
+  {
+   "id": "e034",
+   "ts": 82000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "quality",
+    "role": "Quality",
+    "text": "It is always a cancelled hyperscaler order. One lot, one date code, no C of C, no manufacturer traceability. I pulled photos off their warehouse floor this morning. Run the top-markings against our reference lots.",
+    "plain": "Quality has heard that excuse before. They have photographs of the actual sticks and want the printing on the chips compared against known-genuine examples."
+   }
+  },
+  {
+   "id": "e035",
+   "ts": 84000,
+   "type": "tool.call",
+   "payload": {
+    "callId": "m2",
+    "agent": "quality",
+    "tool": "moss",
+    "label": "Matching module top-marking, FBGA code and lot/date code against reference lots",
+    "status": "running",
+    "plain": "Comparing the printing on the memory chips with pictures and codes from sticks we know are genuine."
+   }
+  },
+  {
+   "id": "e036",
+   "ts": 88000,
+   "type": "tool.result",
+   "payload": {
+    "callId": "m2",
+    "kind": "moss.matches",
+    "payload": {
+     "query": "data/markings/img/suspect-broker-PRC-24817-label.svg",
+     "matches": [
+      {
+       "id": "ref-remarked-cluster-A",
+       "label": "Known remarked pattern — sanded package + ink overprint (ERAI advisory cluster A)",
+       "score": 0.93,
+       "thumbnail": "data/markings/img/reference-remarked-cluster-A.svg"
+      },
+      {
+       "id": "ref-genuine-micron-MTC20F2085S1RC48BA1",
+       "label": "Genuine Micron MTC20F2085S1RC48BA1 — laser-marked, FBGA D8BNJ",
+       "score": 0.41,
+       "thumbnail": "data/markings/img/genuine-micron-MTC20F2085S1RC48BA1-label.svg"
+      },
+      {
+       "id": "ref-genuine-samsung-M321R8GA0BB0-CQK",
+       "label": "Genuine Samsung M321R8GA0BB0-CQK — laser-marked",
+       "score": 0.18,
+       "thumbnail": "data/markings/img/genuine-samsung-M321R8GA0BB0-CQK-label.svg"
+      }
+     ],
+     "latencyMs": 0.2
+    },
+    "plain": "The broker's sticks look 93% like known fakes and only 41% like the genuine part they claim to be. On-device retrieval returned that in 0.2 of a millisecond — a fifth of a millisecond, on the presenter's laptop."
+   }
+  },
+  {
+   "id": "e037",
+   "ts": 90000,
+   "type": "counterfeit.flagged",
+   "payload": {
+    "candidateId": "cand-02",
+    "imageA": "data/markings/img/suspect-broker-PRC-24817-label.svg",
+    "imageB": "data/markings/img/genuine-micron-MTC20F2085S1RC48BA1-label.svg",
+    "score": 0.93,
+    "latencyMs": 0.2,
+    "reason": "Lot PRC-24817 — six independent marking failures: (1) FBGA code D8BQK on a SKU that ships D8BNJ; (2) DRAM package date code 2341 inconsistent with module PCB rev E2 (released 2024 W18); (3) package surface shows abrasion and ink overprint where Micron laser-etches; (4) character pitch and font differ from the Micron reference glyph set; (5) no valid Micron DataMatrix — serials outside any issued range; (6) SPD JEP106 bank/ID reads 0x2C (Micron) but the module-assembler and module-serial bytes are blank. Match 0.93 to known remarked cluster A; 0.41 to genuine reference. Module-level remark: packages were re-labelled on an assembled module. Die origin unknown and unverifiable.",
+    "plain": "The printing on these chips was sanded off and reprinted. They are not the part they claim to be — and we cannot tell what is actually inside them. If we build servers with these, we scrap the whole lot and rebuild the machines."
+   }
+  },
+  {
+   "id": "e038",
+   "ts": 94000,
+   "type": "candidate.status",
+   "payload": {
+    "id": "cand-02",
+    "status": "rejected",
+    "reason": "Counterfeit / remarked indicators confirmed on lot PRC-24817. Non-franchised supply chain, no certificate of conformance, no traceability to the module manufacturer. Supplier referred to ERAI and added to AVL blacklist.",
+    "plain": "Rejected as fake. The cheap, immediately available option would have cost us far more than it saved."
+   }
+  },
+  {
+   "id": "e039",
+   "ts": 97000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "quality",
+    "role": "Quality",
+    "text": "Filing to ERAI and blacklisting Pacific Rim on the AVL. If anyone sees this lot code again — PRC-24817 — it is an automatic reject, no discussion.",
+    "plain": "Quality reports the fake to the industry database and bans this supplier, so no one in the company can buy from them again."
+   }
+  },
+  {
+   "id": "e040",
+   "ts": 99500,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "So I'm left paying $231.80 to Samsung. That's the most expensive quote on the board and I get to explain it to the CFO.",
+    "plain": "The only workable option is the most expensive one, and Sourcing will have to justify it."
+   }
+  },
+  {
+   "id": "e041",
+   "ts": 102000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "engineering",
+    "role": "Engineering",
+    "text": "You're paying $231.80 for a module with a validation report, a BIOS I already shipped and 24-slot loading data. M321R8GA0BB0-CQK, QVL rev D, MV-G4-0288. Mechanically identical — 288-pin RDIMM, 31.25mm, 2Rx4, same 1DPC population rules. Drop-in. Cleared.",
+    "plain": "Engineering confirms the expensive option is a true drop-in replacement that has been fully tested in this exact server. Approved from a technical standpoint."
+   }
+  },
+  {
+   "id": "e042",
+   "ts": 105000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "5,100 pieces in franchised stock, 4,608 allocated to us, ARO five working days. $17.80 over the Micron contract — $82,022 premium on this line. Against $1.79M a day of program exposure, that is noise. Putting it up for approval.",
+    "plain": "The approved part is in stock and arrives in five working days. It costs $17.80 more per stick — about $82,000 extra — against a risk of $1.79M per day if the factory stops."
+   }
+  },
+  {
+   "id": "e043",
+   "ts": 108000,
+   "type": "approval.requested",
+   "payload": {
+    "candidateId": "cand-03",
+    "summary": "Samsung M321R8GA0BB0-CQK · 64GB 2Rx4 DDR5-4800 RDIMM · 4,608 pcs · $231.80/ea · $1,068,134.40 · ARO 5 working days from franchised stock · QVL-G4-2026.08-rev-D, validation report MV-G4-0288 · drop-in module replacement, no die substitution, no board change",
+    "savingsVsBroker": 702000,
+    "plain": "Approve the tested, in-stock replacement: 4,608 sticks for $1,068,134, arriving in five working days. It looks $364,000 more expensive than the middleman's offer — but that offer would have meant scrapping the lot and rebuilding 192 servers, about $1.07M. Net, this decision is $702,000 better."
+   }
+  },
+  {
+   "id": "e044",
+   "ts": 110000,
+   "type": "approval.granted",
+   "payload": {
+    "candidateId": "cand-03",
+    "by": "Commodity Manager, DRAM — sourcing desk",
+    "plain": "A human approved the purchase. This is the only decision the agents did not make on their own."
+   }
+  },
+  {
+   "id": "e045",
+   "ts": 112000,
+   "type": "candidate.status",
+   "payload": {
+    "id": "cand-03",
+    "status": "approved",
+    "reason": "Qualified on QVL-G4-2026.08-rev-D (MV-G4-0288), franchised stock, schedule feasible, human approval recorded",
+    "plain": "Approved: tested on this server, in stock, arrives in time, and a person signed for it."
+   }
+  },
+  {
+   "id": "e046",
+   "ts": 114500,
+   "type": "po.drafted",
+   "payload": {
+    "poNumber": "PO-4471982",
+    "candidateId": "cand-03",
+    "qty": 4608,
+    "total": 1068134.4,
+    "plain": "Purchase order PO-4471982 drafted: 4,608 memory sticks, $1,068,134.40, ready to send to the distributor."
+   }
+  },
+  {
+   "id": "e047",
+   "ts": 117000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "PO-4471982 is out. Build-1 kits are whole. 480 nodes still ship on the committed date.",
+    "plain": "The order is placed. All 480 servers can still be built on schedule."
+   }
+  },
+  {
+   "id": "e048",
+   "ts": 120000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "engineering",
+    "role": "Engineering",
+    "text": "Then the QVL has to say so. Promote Samsung to primary alternate on the G4 memory line, record the EVAL-G4-0412 block and the blacklisted lot, and commit it. I am not re-litigating this in the January audit.",
+    "plain": "Engineering wants the decision written into the official approved-parts list permanently, so it does not get argued about again."
+   }
+  },
+  {
+   "id": "e049",
+   "ts": 123000,
+   "type": "tool.call",
+   "payload": {
+    "callId": "c1",
+    "agent": "engineering",
+    "tool": "entire",
+    "label": "Committing QVL rev-E + full decision record",
+    "status": "running",
+    "plain": "Saving the change to the approved-parts list with a permanent, tamper-evident history entry."
+   }
+  },
+  {
+   "id": "e050",
+   "ts": 128000,
+   "type": "tool.result",
+   "payload": {
+    "callId": "c1",
+    "kind": "entire.commit",
+    "payload": {
+     "commitHash": "7f3c1ab",
+     "blameUrl": "https://entire.dev/linedown/ai-srv-g4/qvl/blame/7f3c1ab#L41",
+     "summary": "QVL-G4-2026.08-rev-D → rev-E. Promote M321R8GA0BB0-CQK (Samsung, 64GB 2Rx4 DDR5-4800 RDIMM) to qualified primary alternate on the AI-SRV-G4 memory line, ref MV-G4-0288. Record Engineering block of TRA564G48D436O (EVAL-G4-0412 incomplete). Record schedule rejection of HMCG94MEBRA109N (14-week lead). Blacklist broker lot PRC-24817 (remarked, ERAI filed). Attach PO-4471982.",
+     "sessionId": "ld-sess-20261003-1402",
+     "linesChanged": 41
+    },
+    "plain": "The approved-parts list is updated and signed. Anyone can now ask who changed what, when, and why — and get an exact answer."
+   }
+  },
+  {
+   "id": "e051",
+   "ts": 130500,
+   "type": "policy.committed",
+   "payload": {
+    "commitHash": "7f3c1ab",
+    "blameUrl": "https://entire.dev/linedown/ai-srv-g4/qvl/blame/7f3c1ab#L41",
+    "summary": "QVL rev-E committed — Samsung M321R8GA0BB0-CQK qualified primary alternate; V-color blocked pending EVAL-G4-0412; broker lot PRC-24817 blacklisted",
+    "sessionId": "ld-sess-20261003-1402",
+    "plain": "The rule change is now part of the permanent record, not a decision living in somebody's inbox."
+   }
+  },
+  {
+   "id": "e052",
+   "ts": 133000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "quality",
+    "role": "Quality",
+    "text": "That hash is the audit answer. One line: who blocked what, against which validation report, at what price, and who signed. That is the IATF 16949 traceability question, answered before it was asked.",
+    "plain": "Automotive and datacenter customers legally require proof of how a part was chosen. That proof now exists as a single permanent record."
+   }
+  },
+  {
+   "id": "e053",
+   "ts": 136000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "engineering",
+    "role": "Engineering",
+    "text": "And V-color can finish EVAL-G4-0412. Get them 40 modules and a thermal chamber slot. Next quarter we can have the $45 argument properly.",
+    "plain": "The cheap supplier is not banned — it just has to finish testing first. Then it becomes a real option."
+   }
+  },
+  {
+   "id": "e054",
+   "ts": 139000,
+   "type": "agent.message",
+   "payload": {
+    "agent": "sourcing",
+    "role": "Sourcing",
+    "text": "Noted. Four candidates, two rejects, one block, one PO, eleven minutes of desk time. Line stays up. Next part.",
+    "plain": "The whole decision — normally days of email — closed in minutes, and the factory never stopped."
+   }
+  },
+  {
+   "id": "e055",
+   "ts": 143000,
+   "type": "run.ended",
+   "payload": {
+    "outcomeLabel": "Qualified alternate approved — 4,608 modules secured, Build-1 kits intact, 480 nodes ship on date",
+    "dollarsSaved": 2487600,
+    "minutesElapsed": 2.5,
+    "plain": "Outcome: $2,487,600 protected — one avoided day of program slip ($1,785,600) plus the counterfeit scrap and rebuild we did not buy ($702,000). The decision took 2.5 minutes. By email it takes days, and the factory is idle for every one of them."
+   }
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+# LINEDOWN marking fixture — flat text sidecar.
+# GENERATED from the sibling .json. Edit the .json, not this file.
+# Purpose: the text-match fallback for beat 5. If Moss image embedding is unavailable
+# (MILESTONES.md risk register, M1), every discriminator in beat 5 is still reachable from
+# these lines using string, regex, range and date comparisons alone.
+# Format: TAB-separated. <TAG>\t<value>   — grep-friendly and embedding-friendly.
+# ILLUSTRATIVE: all marking strings, lot codes and serials are fabricated for the demo.
+# MODULE-LEVEL ONLY: these are markings on an assembled 288-pin RDIMM. No die analysis.
+#
+FIXTURE	genuine-samsung-M321R8GA0BB0-CQK
+CLASS	genuine-reference
+MPN	M321R8GA0BB0-CQK
+MANUFACTURER	Samsung Semiconductor
+MODULE_LABEL	SAMSUNG
+MODULE_LABEL	M321R8GA0BB0-CQK
+MODULE_LABEL	64GB 2Rx4 PC5-4800B-RR2-1010-XT
+MODULE_LABEL	SN: C4F20A77
+MODULE_LABEL	LOT: GTW2608B
+MODULE_LABEL	DC: 2608
+MODULE_LABEL	MADE IN KOREA
+BARCODE	Code 128=M321R8GA0BB0-CQK
+BARCODE	DataMatrix ECC200=1P M321R8GA0BB0-CQK S C4F20A77 1T GTW2608B
+PKG_MARKING	SAMSUNG 608
+PKG_MARKING	K4RAH086VB-BCQK
+PKG_MARKING	GTW2608B
+PKG_MARKING	KOREA
+PKG_FIELD	markingMethod=laser-etched
+PKG_FIELD	componentPartNumber=K4RAH086VB-BCQK
+PKG_FIELD	glyphProfile=samsung-laser-v2
+PKG_FIELD	characterPitchMm=0.95
+PKG_FIELD	surfaceFinish=uniform moulded epoxy, no abrasion, consistent gloss
+SPD	revision=SPD5 hub (SPD5118)
+SPD	moduleManufacturerJep106=0xCE
+SPD	dramManufacturerJep106=0xCE
+SPD	moduleManufacturingLocation=0x01
+SPD	moduleManufacturingDate=2608
+SPD	moduleSerialNumber=C4F20A77
+SPD	modulePartNumber=M321R8GA0BB0-CQK
+PCB	revision=A1
+PCB	firstBuildDate=2025-W31
+VALIDATOR	dateCodeRegex=^(2[0-9])(0[1-9]|[1-4][0-9]|5[0-3])$
+VALIDATOR	lotCodeRegex=^[A-Z]{3}[0-9]{4}[A-Z]$
+VALIDATOR	serialRegex=^[0-9A-F]{8}$
+VALIDATOR	issuedSerialRanges=[["C0000000", "CFFFFFFF"]]
+VALIDATOR	allowedComponentPartNumbers=["K4RAH086VB-BCQK"]
+VALIDATOR	allowedAssemblySites=["KOREA", "CHINA"]
+VALIDATOR	allowedMarkingMethods=["laser-etched"]
+PLAIN	The part we actually bought. Laser-burned codes, a traceable serial number, a working tracking code, and every date agreeing with every other date.
