@@ -9,7 +9,7 @@
   "platformLabel": "AI-SRV-G4 — 480 node cluster",
   "supersedes": "QVL-G4-2026.08-rev-D",
   "qvlRevision": "QVL-G4-2026.08-rev-E",
-  "amendedAt": "2026-10-03T22:30:04.906Z",
+  "amendedAt": "2026-10-03T22:32:35.859Z",
   "requirements": {
     "capacityGB": 64,
     "speedMTps": 4800,
@@ -41,6 +41,5 @@
       "revisitWhen": "validation report issued"
     }
   ],
-  "blacklistedLots": [],
-  "entireCheckpoint": "01M41Y6846EXDDP1RGZY9B6C1T"
+  "blacklistedLots": []
 }
